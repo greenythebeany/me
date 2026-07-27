@@ -1,0 +1,337 @@
+/* ---------- boot overlay ---------------------------------------------- */
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gutter);
+  background: var(--bg);
+  animation: bootIn 0.2s var(--ease);
+}
+@keyframes bootIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.boot-inner {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+  font-size: clamp(0.72rem, 2.4vw, 0.9rem);
+  line-height: 2;
+  color: var(--mid);
+}
+
+.boot-line {
+  animation: bootLine 0.16s var(--ease);
+}
+@keyframes bootLine {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+.boot-cursor {
+  color: var(--bright);
+}
+
+.boot-skip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(20px, 5vh, 44px);
+  text-align: center;
+  color: var(--faint);
+}
+
+/* ---------- top bar ---------------------------------------------------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  padding-bottom: 12px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+/* how far down the document you are, drawn as a hairline across the top */
+.scrollbar-progress {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--bright);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.statusline {
+  border-bottom: 1px solid var(--rule-soft);
+  color: var(--mid);
+}
+
+.statusline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 34px;
+  font-size: 0.68rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.statusline-brand {
+  color: var(--bright);
+}
+.statusline-sep {
+  margin-inline: 10px;
+  color: var(--rule);
+}
+.statusline-muted {
+  color: var(--mid);
+}
+
+.statusline-cells {
+  display: flex;
+  gap: clamp(14px, 3vw, 34px);
+}
+.statusline-clock {
+  color: var(--bright);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- menu bar --------------------------------------------------- */
+
+.menubar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 6px 10px 6px 6px;
+  background: var(--bg-panel);
+}
+
+.menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.menu::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 7px;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition:
+    color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+.menu-item:hover {
+  color: var(--bright);
+  background: var(--ghost);
+}
+.menu-item {
+  position: relative;
+  z-index: 1;
+}
+.menu-item.active {
+  color: var(--bg);
+}
+.menu-item.active:hover {
+  background: none;
+}
+
+/* the pill that slides between items */
+.menu-pill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: calc(100% - 4px);
+  border-radius: 7px;
+  background: var(--bright);
+  transform-origin: 0 50%;
+  translate: 0 -50%;
+  transition:
+    transform 0.42s var(--ease),
+    width 0.42s var(--ease);
+  pointer-events: none;
+}
+.menu-num {
+  font-size: 0.66rem;
+  opacity: 0.6;
+}
+.menu-item.active .menu-num {
+  opacity: 0.75;
+}
+
+.menu-current {
+  display: none;
+  padding-left: 10px;
+  font-size: 0.76rem;
+  color: var(--bright);
+}
+
+.menu-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--mid);
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+.key:hover {
+  color: var(--bright);
+  border-color: var(--bright);
+  background: var(--ghost);
+}
+.key-cap {
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: var(--ghost);
+  color: var(--dim);
+  font-size: 0.62rem;
+}
+
+.burger {
+  display: none;
+}
+
+/* ---------- footer ----------------------------------------------------- */
+
+.footbar {
+  margin: clamp(60px, 10vw, 120px) 0 clamp(28px, 5vw, 48px);
+}
+
+.footbar-panel {
+  padding: clamp(24px, 5vw, 42px) var(--gutter);
+  text-align: center;
+  background: var(--bg-panel);
+}
+
+.footbar-prompt {
+  font-size: clamp(1.1rem, 3.6vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--bright);
+}
+
+.footbar-note {
+  margin-top: 12px;
+  color: var(--ink-soft);
+}
+
+.footbar-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+}
+.footbar-links {
+  display: flex;
+  gap: 20px;
+}
+.footbar-links a {
+  color: var(--mid);
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+.footbar-links a:hover {
+  color: var(--bright);
+  border-color: var(--bright);
+}
+
+/* ---------- responsive ------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .statusline-cells > :not(.statusline-clock) {
+    display: none;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+
+  .menubar {
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  .menu {
+    display: none;
+    order: 3;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding-top: 8px;
+    margin-top: 6px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .menu.open {
+    display: flex;
+  }
+  .menu-pill {
+    display: none;
+  }
+  .menu-item.active {
+    background: var(--bright);
+  }
+
+  .menu-current {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .menu-actions {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 460px) {
+  .key .key-cap {
+    display: none;
+  }
+}

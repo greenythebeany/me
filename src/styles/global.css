@@ -1,0 +1,247 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 132px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* The CRT wash: a fixed scanline grid plus a soft vignette. Kept very low
+   contrast so it reads as texture and never as noise over the copy. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--scan) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--bright);
+  color: var(--bg);
+}
+
+/* ---------- shared chrome primitives ---------------------------------- */
+
+/* Small uppercase monospace label. This is where the BIOS lives: labels,
+   keys, statuses and numbers. Body copy stays in the sans face. */
+.chrome {
+  font-family: var(--mono);
+  font-size: var(--fs-chrome);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* A dot leader, like `SITE .......... FEI STU`. */
+.leader {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: var(--fs-chrome);
+}
+.leader::after {
+  content: '';
+  flex: 1;
+  order: 1;
+  height: 0;
+  border-bottom: 1px dotted var(--rule);
+  transform: translateY(-4px);
+}
+.leader > :last-child {
+  order: 2;
+}
+
+.panel {
+  position: relative;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg-panel);
+}
+
+/* Corner ticks, the way a BIOS setup screen marks its frame. */
+.panel::before,
+.panel::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: var(--bright);
+  border-style: solid;
+  opacity: 0.55;
+}
+.panel::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+  border-top-left-radius: var(--radius);
+}
+.panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+  border-bottom-right-radius: var(--radius);
+}
+
+/* Cursor-tracked phosphor bloom. Painted as a background layer rather than a
+   pseudo-element, because .panel already spends ::before and ::after on its
+   corner ticks. Registering the colour lets it fade instead of snapping. */
+@property --glow-a {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+.glow {
+  --mx: 50%;
+  --my: 50%;
+  --glow-a: transparent;
+  background-image: radial-gradient(
+    380px circle at var(--mx) var(--my),
+    var(--glow-a),
+    transparent 62%
+  );
+  transition: --glow-a 0.32s var(--ease);
+}
+.glow:hover {
+  --glow-a: var(--glow);
+}
+
+@media (hover: none) {
+  .glow {
+    background-image: none;
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.6em;
+  background: currentColor;
+  animation: caret 1.06s steps(1) infinite;
+}
+@keyframes caret {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Reveal-on-scroll, driven by an IntersectionObserver in useReveal. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s var(--ease),
+    transform 0.55s var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* When one observer should release a whole cluster, put `.reveal-group` on
+   the observed wrapper and `.reveal` (plus a --delay) on each child. */
+.reveal-group.in .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  body::before {
+    display: none;
+  }
+}
