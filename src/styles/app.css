@@ -317,8 +317,15 @@
     margin-top: 6px;
     border-top: 1px solid var(--rule-soft);
   }
+  /* the panel unrolls downward, then each entry types in after the last,
+     like a BIOS submenu being drawn line by line */
   .menu.open {
     display: flex;
+    animation: menuUnroll 0.32s var(--ease) both;
+  }
+  .menu.open .menu-item {
+    animation: menuLine 0.28s var(--ease) both;
+    animation-delay: calc(80ms + var(--i) * 55ms);
   }
   .menu-pill {
     display: none;
@@ -334,6 +341,21 @@
   }
   .menu-actions {
     margin-left: auto;
+  }
+}
+
+@keyframes menuUnroll {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes menuLine {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
   }
 }
 

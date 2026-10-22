@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLang } from '../i18n'
-import { useDecode, useReveal } from '../hooks'
+import { useCountUp, useDecode, useReveal } from '../hooks'
 import { hero, site } from '../data/content'
 import repoData from '../data/repos.json'
 
@@ -24,6 +24,57 @@ function TitleLine({ text, index, armed }) {
     <span className="hero-line" data-text={text} aria-hidden="true">
       {go ? shown : text.replace(/\S/g, ' ')}
     </span>
+  )
+}
+
+/** The BIOS "system information" page, filled with real numbers. On load it
+ *  is dragged open from its two corner ticks: both start at the centre and
+ *  pull apart to top-left and bottom-right, the frame unclipping between
+ *  them. One registered property, --open (0 to 1), drives the ticks, the
+ *  clip and the content fade, so with motion off it simply lands at 1. */
+function SysInfo({ ready }) {
+  const { t } = useLang()
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!ready) return
+    const id = setTimeout(() => setOpen(true), 320)
+    return () => clearTimeout(id)
+  }, [ready])
+
+  const total = useCountUp(TOTAL, open, 1300)
+
+  return (
+    <div className={`sysinfo-frame${open ? ' is-open' : ''}`}>
+      <span className="sysinfo-tick tl" aria-hidden="true" />
+      <span className="sysinfo-tick br" aria-hidden="true" />
+      <div className="sysinfo panel">
+        <h2 className="card-head chrome">{t(hero.panel)}</h2>
+        <dl className="sysinfo-list">
+          {hero.meta.map((m, i) => (
+            <div key={i} className="leader">
+              <dt>{t(m.key)}</dt>
+              <dd>{t(m.val)}</dd>
+            </div>
+          ))}
+        </dl>
+        {TOP && (
+          <div className="sysinfo-stat">
+            <p className="sysinfo-num mono">
+              <span aria-hidden="true">{total}</span>
+              <span className="sr-only">{TOTAL}</span>
+            </p>
+            <p className="label">{t(hero.activity.label)}</p>
+            <p className="sysinfo-top">
+              {t(hero.activity.top)}:{' '}
+              <a href="#projects" translate="no">
+                {TOP.name}
+              </a>
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
   )
 }
 
@@ -65,32 +116,7 @@ export default function Hero({ ready }) {
           </div>
         </div>
 
-        {/* the BIOS "system information" page, filled with real numbers */}
-        <div className="sysinfo panel reveal" style={{ '--delay': '260ms' }}>
-          <h2 id="sysinfo-title" className="card-head chrome">
-            {t(hero.panel)}
-          </h2>
-          <dl className="sysinfo-list">
-            {hero.meta.map((m, i) => (
-              <div key={i} className="leader">
-                <dt>{t(m.key)}</dt>
-                <dd>{t(m.val)}</dd>
-              </div>
-            ))}
-          </dl>
-          {TOP && (
-            <div className="sysinfo-stat">
-              <p className="sysinfo-num mono">{TOTAL}</p>
-              <p className="label">{t(hero.activity.label)}</p>
-              <p className="sysinfo-top">
-                {t(hero.activity.top)}:{' '}
-                <a href="#projects" translate="no">
-                  {TOP.name}
-                </a>
-              </p>
-            </div>
-          )}
-        </div>
+        <SysInfo ready={ready} />
       </div>
     </section>
   )

@@ -120,9 +120,10 @@ export default function TopBar() {
                 style={{ transform: `translateX(${pill.x}px)`, width: `${pill.w}px` }}
               />
             )}
-            {nav.map((item) => (
+            {nav.map((item, i) => (
               <a
                 key={item.id}
+                style={{ '--i': i }}
                 href={`#${item.id}`}
                 className={`menu-item${active === item.id ? ' active' : ''}`}
                 aria-current={active === item.id ? 'location' : undefined}

@@ -223,7 +223,65 @@
   margin-top: clamp(28px, 4vw, 40px);
 }
 
-/* the "system information" panel */
+/* the "system information" panel, dragged open from its corner ticks */
+@property --open {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.sysinfo-frame {
+  --open: 0;
+  position: relative;
+}
+.sysinfo-frame.is-open {
+  --open: 1;
+  transition: --open 0.9s cubic-bezier(0.65, 0, 0.2, 1);
+}
+
+/* the panel is unclipped from the centre out, in step with the ticks */
+.sysinfo {
+  clip-path: inset(calc((1 - var(--open)) * 50%) round var(--radius));
+}
+/* the frame's own ticks take over from the panel's */
+.sysinfo::before,
+.sysinfo::after {
+  display: none;
+}
+/* content arrives only once the frame is mostly open */
+.sysinfo > * {
+  opacity: calc((var(--open) - 0.55) / 0.45);
+}
+
+.sysinfo-tick {
+  position: absolute;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  border: 0 solid var(--bright);
+  pointer-events: none;
+  /* visible at full strength while moving, settling to the resting 55% */
+  opacity: calc(1 - var(--open) * 0.45);
+}
+/* each tick travels from the centre to its corner as --open goes 0 to 1 */
+.sysinfo-tick.tl {
+  top: calc((1 - var(--open)) * 50% - 1px);
+  left: calc((1 - var(--open)) * 50% - 1px);
+  border-width: 1px 0 0 1px;
+  border-top-left-radius: var(--radius);
+}
+.sysinfo-tick.br {
+  bottom: calc((1 - var(--open)) * 50% - 1px);
+  right: calc((1 - var(--open)) * 50% - 1px);
+  border-width: 0 1px 1px 0;
+  border-bottom-right-radius: var(--radius);
+}
+
+@media print {
+  .sysinfo-frame {
+    --open: 1;
+  }
+}
 .sysinfo-list {
   padding: var(--space-5) var(--space-5) var(--space-4);
 }
