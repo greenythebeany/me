@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # rebuild nightly so the "most active repos" section stays current
+  schedule:
+    - cron: '17 3 * * *'
   workflow_dispatch:
 
 # Allow the workflow to publish to Pages.
@@ -29,6 +32,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
