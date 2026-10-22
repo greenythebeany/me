@@ -7,10 +7,10 @@ Tokens live in `src/styles/tokens.css`. This file explains them; the CSS is the 
 
 A firmware setup screen that learned some manners. The page reads like a BIOS: framed panels with corner ticks, numbered sections, uppercase letterspaced status labels, dot leaders, a boot sequence and a blinking caret. Underneath that chrome, the reading experience is calm and modern: generous line height, a comfortable measure, plenty of air between sections.
 
-- **Mood:** utilitarian, nocturnal, precise, a little playful. Phosphor green on near-black, like a terminal left on overnight.
+- **Mood:** utilitarian, nocturnal, precise, a little playful. P1 phosphor green on tube black, like a CRT terminal left on overnight. Green is the identity: it's in the name.
 - **Density:** sparse at page level, dense inside panels. Whitespace separates ideas; panels group them.
 - **Personality comes from the chrome, never from the copy.** Labels, keys, numbers and statuses carry the BIOS voice. Paragraphs are plain, readable prose.
-- **The palette matches the GitHub profile renders**, so the site and the profile read as the same machine.
+- **The palette is a warm, true CRT green**, not a teal or mint. The GitHub profile renders should be updated to match.
 
 Two hard rules keep the gimmick honest:
 1. Every BIOS affordance must be real or clearly decorative. Never print a shortcut (`F2`, `<ENTER>`) that doesn't work.
@@ -24,39 +24,39 @@ Each theme has the same token names, so components never branch on theme. Contra
 
 | Token | Name | Hex | Role |
 |---|---|---|---|
-| `--bg` | Terminal Night | `#0d1117` | Page background (matches GitHub dark) |
-| `--bg-panel` | Bezel Black | `#0f151b` | Panel fill |
-| `--bg-raise` | Raised Slate | `#131c22` | Panel header strips and footers |
-| `--ghost` | Phosphor Shadow | `#16302a` | Hover wash, lab-slot fill, key caps, oversized ghost numerals |
-| `--faint` | Deep Moss | `#0e3a32` | **Decorative only** (1.5:1). Never text |
-| `--dim` | Low Phosphor | `#17715f` | **Decorative only** (3.2:1). Glitch ghost, inactive marks. Never text |
-| `--mid` | Signal Teal | `#2fa98f` | Secondary text: labels, dates, metadata (6.5:1) |
-| `--bright` | Phosphor Mint | `#7cf5d5` | Accent: headings' emphasis, active states, primary button fill, focus ring (14.3:1) |
-| `--hot` | Overdriven Mint | `#c4fff0` | Primary button hover |
-| `--ink` | Cool Paper | `#cfe6e0` | Primary text (14.5:1) |
-| `--ink-soft` | Faded Paper | `#8fb3aa` | Body copy, descriptions (8.3:1) |
-| `--rule` | Circuit Trace | `#22564b` | Panel borders, dividers (decorative, 2.3:1) |
-| `--rule-soft` | Faint Trace | `#17322c` | Inner dividers, hairlines |
-| `--rule-strong` | Live Trace | `#317a69` | Borders of interactive controls: buttons, keys (3.7:1, meets the 3:1 non-text rule) |
+| `--bg` | Tube Black | `#0a0e09` | Page background, black with a trace of green like an unlit CRT |
+| `--bg-panel` | Bezel | `#0d120c` | Panel fill |
+| `--bg-raise` | Raised Bezel | `#121a10` | Panel header strips and footers |
+| `--ghost` | Burn-in | `#1a2a17` | Hover wash, lab-slot fill, key caps, oversized ghost numerals |
+| `--faint` | Deep Moss | `#1f3a1a` | **Decorative only** (1.6:1). Never text |
+| `--dim` | Low Phosphor | `#2f6b26` | **Decorative only** (3.0:1). Glitch ghost, inactive marks. Never text |
+| `--mid` | Signal Green | `#5fbf4f` | Secondary text: labels, dates, metadata (8.4:1) |
+| `--bright` | P1 Phosphor | `#41ff3a` | Accent: headings' emphasis, active states, primary button fill, focus ring (14.4:1) |
+| `--hot` | Overdriven Phosphor | `#b6ffaf` | Primary button hover |
+| `--ink` | Pale Phosphor | `#dcf2d5` | Primary text (16.4:1) |
+| `--ink-soft` | Faded Phosphor | `#a3c49a` | Body copy, descriptions (10.1:1) |
+| `--rule` | Circuit Trace | `#284d22` | Panel borders, dividers (decorative, 2.0:1) |
+| `--rule-soft` | Faint Trace | `#1a2a17` | Inner dividers, hairlines |
+| `--rule-strong` | Live Trace | `#3f8a35` | Borders of interactive controls: buttons, keys (4.5:1, meets the 3:1 non-text rule) |
 
 ### Light
 
 | Token | Name | Hex | Role |
 |---|---|---|---|
-| `--bg` | Paper White | `#ffffff` | Page background |
-| `--bg-panel` | Mint Paper | `#fbfdfc` | Panel fill |
-| `--bg-raise` | Pale Celadon | `#f2f8f6` | Panel header strips and footers |
-| `--ghost` | Celadon Wash | `#e4f1ec` | Hover wash, lab-slot fill, key caps, ghost numerals |
-| `--faint` | Mist | `#cfe8df` | **Decorative only** |
-| `--dim` | Sea Glass | `#8ccbb7` | **Decorative only** |
-| `--mid` | Deep Teal | `#26715e` | Secondary text (5.8:1; 5.0:1 on `--ghost`) |
-| `--bright` | Forest Ink | `#0c3c33` | Accent, primary button fill, focus ring (12.3:1) |
-| `--hot` | Blackened Forest | `#04231d` | Primary button hover |
-| `--ink` | Pine Ink | `#16302a` | Primary text (14.1:1) |
-| `--ink-soft` | Lichen | `#4f736a` | Body copy (5.3:1) |
-| `--rule` | Celadon Line | `#a9cfc3` | Panel borders, dividers (decorative) |
-| `--rule-soft` | Whisper Line | `#dcece6` | Inner dividers |
-| `--rule-strong` | Slate Teal | `#5f978a` | Borders of interactive controls (3.3:1) |
+| `--bg` | Green Paper | `#fafcf6` | Page background, the faint green of fanfold printer paper |
+| `--bg-panel` | Paper | `#fdfefb` | Panel fill |
+| `--bg-raise` | Tinted Paper | `#f1f7e9` | Panel header strips and footers |
+| `--ghost` | Paper Wash | `#e5f0d9` | Hover wash, lab-slot fill, key caps, ghost numerals |
+| `--faint` | Mist | `#d4e8c2` | **Decorative only** |
+| `--dim` | Fern | `#9cc982` | **Decorative only** |
+| `--mid` | Field Green | `#2d6a1e` | Secondary text (6.4:1; 5.6:1 on `--ghost`) |
+| `--bright` | Ledger Green | `#1d5c10` | Accent, primary button fill, focus ring (7.8:1) |
+| `--hot` | Deep Ledger | `#113d08` | Primary button hover |
+| `--ink` | Forest Ink | `#152510` | Primary text (15.6:1) |
+| `--ink-soft` | Lichen | `#45613b` | Body copy (6.7:1) |
+| `--rule` | Green Line | `#bdd9a9` | Panel borders, dividers (decorative) |
+| `--rule-soft` | Whisper Line | `#e3eed7` | Inner dividers |
+| `--rule-strong` | Moss Line | `#6c9a58` | Borders of interactive controls (3.2:1) |
 
 In light mode the roles invert: `--bright` becomes the darkest green, because the accent has to be the highest-contrast color on the page in both themes.
 
@@ -71,7 +71,7 @@ In light mode the roles invert: `--bright` becomes the darkest green, because th
 Two families with strictly separate jobs:
 
 - **Monospace (`--mono`, JetBrains Mono)** is the BIOS voice: headings, labels, keys, numbers, statuses, times. Weights 400, 500 and 700.
-- **Sans (`--sans`)** is the reading voice: lead paragraphs, card copy, descriptions, list items. Weights 400 and 600. The sans face is under review (see Phase 2 proposal); token name stays the same whatever wins.
+- **Sans (`--sans`)** is the reading voice: lead paragraphs, card copy, descriptions, list items. Weights 400 and 600. The face is Atkinson Hyperlegible Next, chosen for distinct letterforms (`I`, `l`, `1`) over a generic grotesk.
 
 | Token | Value | Used for |
 |---|---|---|

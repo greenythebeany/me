@@ -1,7 +1,6 @@
 /* Design tokens for the Phosphor BIOS system. DESIGN.md explains every role
-   and rule; this file holds the values. Palette is the one from the profile
-   README's BIOS renders, so the site and the GitHub profile read as the same
-   machine. */
+   and rule; this file holds the values. The palette is P1 green phosphor:
+   a warm CRT green on green-black, GreenyBeany's colour. */
 
 :root {
   /* ---------- type ---------- */
@@ -58,51 +57,51 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --bg: #0d1117;
-  --bg-panel: #0f151b;
-  --bg-raise: #131c22;
-  --ghost: #16302a;
+  --bg: #0a0e09;
+  --bg-panel: #0d120c;
+  --bg-raise: #121a10;
+  --ghost: #1a2a17;
 
-  --faint: #0e3a32;
-  --dim: #17715f;
-  --mid: #2fa98f;
-  --bright: #7cf5d5;
-  --hot: #c4fff0;
+  --faint: #1f3a1a;
+  --dim: #2f6b26;
+  --mid: #5fbf4f;
+  --bright: #41ff3a;
+  --hot: #b6ffaf;
 
-  --ink: #cfe6e0;
-  --ink-soft: #8fb3aa;
+  --ink: #dcf2d5;
+  --ink-soft: #a3c49a;
 
-  --rule: #22564b;
-  --rule-soft: #17322c;
-  --rule-strong: #317a69;
+  --rule: #284d22;
+  --rule-soft: #1a2a17;
+  --rule-strong: #3f8a35;
 
-  --glow: rgba(124, 245, 213, 0.14);
-  --scan: rgba(124, 245, 213, 0.028);
+  --glow: rgba(65, 255, 58, 0.10);
+  --scan: rgba(65, 255, 58, 0.03);
   --shadow: 0 18px 50px -28px rgba(0, 0, 0, 0.9);
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
 
-  --bg: #ffffff;
-  --bg-panel: #fbfdfc;
-  --bg-raise: #f2f8f6;
-  --ghost: #e4f1ec;
+  --bg: #fafcf6;
+  --bg-panel: #fdfefb;
+  --bg-raise: #f1f7e9;
+  --ghost: #e5f0d9;
 
-  --faint: #cfe8df;
-  --dim: #8ccbb7;
-  --mid: #26715e;
-  --bright: #0c3c33;
-  --hot: #04231d;
+  --faint: #d4e8c2;
+  --dim: #9cc982;
+  --mid: #2d6a1e;
+  --bright: #1d5c10;
+  --hot: #113d08;
 
-  --ink: #16302a;
-  --ink-soft: #4f736a;
+  --ink: #152510;
+  --ink-soft: #45613b;
 
-  --rule: #a9cfc3;
-  --rule-soft: #dcece6;
-  --rule-strong: #5f978a;
+  --rule: #bdd9a9;
+  --rule-soft: #e3eed7;
+  --rule-strong: #6c9a58;
 
-  --glow: rgba(12, 60, 51, 0.08);
-  --scan: rgba(12, 60, 51, 0.02);
-  --shadow: 0 18px 50px -32px rgba(12, 60, 51, 0.28);
+  --glow: rgba(29, 92, 16, 0.07);
+  --scan: rgba(29, 92, 16, 0.02);
+  --shadow: 0 18px 50px -32px rgba(29, 92, 16, 0.28);
 }

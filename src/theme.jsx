@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 
 const KEY = 'gb-theme'
 const ThemeCtx = createContext(null)
-const BG = { dark: '#0d1117', light: '#ffffff' }
+const BG = { dark: '#0a0e09', light: '#fafcf6' }
 
 /** The inline script in index.html has already picked the theme (stored
  *  choice, else the OS setting) before first paint; start from what it set. */
