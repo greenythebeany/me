@@ -15,7 +15,8 @@ export function useReveal(options) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (reducedMotion()) {
+    // no observer (old or hardened browser) means no reveal, never hidden content
+    if (reducedMotion() || typeof IntersectionObserver === 'undefined') {
       el.classList.add('in')
       setShown(true)
       return
