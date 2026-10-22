@@ -188,10 +188,10 @@
 }
 .menu-num {
   font-size: 0.66rem;
-  opacity: 0.6;
+  color: var(--mid);
 }
 .menu-item.active .menu-num {
-  opacity: 0.75;
+  color: inherit;
 }
 
 .menu-current {

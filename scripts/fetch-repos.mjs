@@ -57,9 +57,10 @@ async function main() {
     try {
       dates = await commitDates(r.name, since)
     } catch (e) {
-      // an empty repo answers 409; anything else is worth a warning
-      if (!String(e.message).startsWith('409')) console.warn(`[repos] ${r.name}: ${e.message}`)
-      continue
+      // an empty repo answers 409; anything else (rate limit, outage) would
+      // leave a partial ranking, so give up and keep the snapshot instead
+      if (String(e.message).startsWith('409')) continue
+      throw e
     }
     if (!dates.length) continue
 
@@ -83,6 +84,7 @@ async function main() {
     })
   }
 
+  if (!ranked.length) throw new Error('no active repos found')
   ranked.sort((a, b) => b.commits - a.commits || b.pushedAt.localeCompare(a.pushedAt))
   const data = { generatedAt: new Date(now).toISOString(), days: DAYS, repos: ranked.slice(0, TOP) }
   await writeFile(OUT, JSON.stringify(data, null, 2) + '\n')

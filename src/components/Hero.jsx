@@ -66,7 +66,7 @@ export default function Hero({ ready }) {
         </div>
 
         {/* the BIOS "system information" page, filled with real numbers */}
-        <aside className="sysinfo panel reveal" style={{ '--delay': '260ms' }} aria-labelledby="sysinfo-title">
+        <div className="sysinfo panel reveal" style={{ '--delay': '260ms' }}>
           <h2 id="sysinfo-title" className="card-head chrome">
             {t(hero.panel)}
           </h2>
@@ -90,7 +90,7 @@ export default function Hero({ ready }) {
               </p>
             </div>
           )}
-        </aside>
+        </div>
       </div>
     </section>
   )
