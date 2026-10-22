@@ -9,14 +9,17 @@ import './styles/sections.css'
 
 import { LangProvider } from './i18n'
 import { ThemeProvider } from './theme'
+import { MotionProvider } from './motion'
 import App from './App'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
-      <LangProvider>
-        <App />
-      </LangProvider>
+      <MotionProvider>
+        <LangProvider>
+          <App />
+        </LangProvider>
+      </MotionProvider>
     </ThemeProvider>
   </StrictMode>,
 )

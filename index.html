@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-motion="on">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -54,6 +54,8 @@
         }
         document.documentElement.setAttribute('data-theme', t)
         document.querySelector('meta[name="theme-color"]').content = t === 'light' ? '#fafcf6' : '#0a0e09'
+        // animations are on unless this visitor turned them off with F4
+        document.documentElement.setAttribute('data-motion', localStorage.getItem('gb-motion') === 'off' ? 'off' : 'on')
         var l = localStorage.getItem('gb-lang')
         if (l === 'sk' || l === 'en') document.documentElement.lang = l
       } catch (e) {}

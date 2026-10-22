@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useLang } from '../i18n'
 import { useTheme } from '../theme'
+import { useMotion } from '../motion'
 import { useNow, useScrollProgress, useScrollSpy, useShortcut } from '../hooks'
 import { nav, site, ui } from '../data/content'
 
@@ -27,6 +28,7 @@ function Clock() {
 export default function TopBar() {
   const { lang, toggle: toggleLang, t } = useLang()
   const { theme, toggle: toggleTheme } = useTheme()
+  const { motion, toggle: toggleMotion } = useMotion()
   const active = useScrollSpy(IDS)
   const progress = useScrollProgress()
   const [open, setOpen] = useState(false)
@@ -35,6 +37,7 @@ export default function TopBar() {
   // the F-keys printed on the bar actually work
   useShortcut('F2', toggleLang)
   useShortcut('F3', toggleTheme)
+  useShortcut('F4', toggleMotion)
 
   // A single pill slides between menu items rather than each item painting
   // its own background, so switching sections reads as one movement.
@@ -147,6 +150,18 @@ export default function TopBar() {
               <span className="key-cap">F3</span>
               {t(theme === 'dark' ? ui.dark : ui.light)}
               <span className="sr-only"> — {t(ui.themeKey)}</span>
+            </button>
+            <button
+              className="key key-motion"
+              type="button"
+              onClick={toggleMotion}
+              aria-keyshortcuts="F4"
+              aria-pressed={motion === 'on'}
+            >
+              <span className="key-cap">F4</span>
+              <span className="key-word">{t(ui.motion)} </span>
+              {motion === 'on' ? 'ON' : 'OFF'}
+              <span className="sr-only"> — {t(ui.motionKey)}</span>
             </button>
             <button
               ref={burgerRef}

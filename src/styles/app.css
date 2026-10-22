@@ -359,8 +359,15 @@
   }
 }
 
+/* motion off reads as a key that's switched off, not as an error */
+.key-motion[aria-pressed='false'] {
+  color: var(--ink-soft);
+  border-style: dashed;
+}
+
 @media (max-width: 460px) {
-  .key .key-cap {
+  .key .key-cap,
+  .key .key-word {
     display: none;
   }
 }

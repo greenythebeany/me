@@ -242,24 +242,26 @@ ol {
   transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
-  body::before {
-    display: none;
-  }
+/* F4 switches motion off: everything lands on its end state at once. The
+   OS reduced-motion setting is deliberately not used; motion is opt-out. */
+:root[data-motion='off'] {
+  scroll-behavior: auto;
+}
+:root[data-motion='off'] *,
+:root[data-motion='off'] *::before,
+:root[data-motion='off'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+}
+:root[data-motion='off'] .reveal {
+  opacity: 1;
+  transform: none;
+}
+:root[data-motion='off'] body::before {
+  display: none;
 }
 
 /* Paper gets the finished page: nothing waiting to scroll into view, no

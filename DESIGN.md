@@ -14,7 +14,7 @@ A firmware setup screen that learned some manners. The page reads like a BIOS: f
 
 Two hard rules keep the gimmick honest:
 1. Every BIOS affordance must be real or clearly decorative. Never print a shortcut (`F2`, `<ENTER>`) that doesn't work.
-2. Texture (scanlines, glow, decode effects) stays below the threshold of noise and disappears entirely under `prefers-reduced-motion`.
+2. Texture (scanlines, glow, decode effects) stays below the threshold of noise and disappears entirely when the visitor turns motion off with F4.
 
 ## 2. Color Palette & Roles
 
@@ -133,13 +133,15 @@ Motion explains state or rewards attention. It never blocks reading.
 | `--dur-base` | `0.42s` | Menu pill, card lift |
 | `--dur-slow` | `0.55s` | Scroll reveals |
 
-- **Boot sequence:** a POST log of five or so lines, about 1.5 seconds. Runs once per tab (`sessionStorage`), skippable by any key or click, and skipped entirely under reduced motion. The page behind it is `inert` until it finishes.
+- **Boot sequence:** a POST log of five or so lines, about 1.5 seconds. Runs once per tab (`sessionStorage`), skippable by any key or click, and skipped entirely when motion is off. The page behind it is `inert` until it finishes.
 - **Reveals:** elements fade up 14px when they enter the viewport, staggered by 60–90ms. Fire once.
 - **Decode:** titles resolve out of random glyphs left to right. Text length never changes, so nothing reflows. The accessible name is always the final text, never the noise.
 - **Count-up:** meter percentages ease from 0 as the bar fills.
-- **Caret:** a stepped 1.06s blink. Stops under reduced motion.
+- **Caret:** a stepped 1.06s blink. Stops when motion is off.
 - Animate only `transform`, `opacity` and colors. Never `transition: all`.
-- **Reduced motion:** all of the above collapse to their end state instantly; scanlines and smooth scrolling turn off.
+- **Panel open:** the System information panel is dragged open from its two corner ticks, which start at the centre and pull apart to top-left and bottom-right while the frame unclips. One registered property (`--open`) drives it.
+- **Menu:** the collapsed mobile menu unrolls downward and its entries step in one after another.
+- **Motion is opt-out, not OS-driven.** Animations run for everyone by default, including visitors whose OS asks for reduced motion; `F4` in the top bar turns them off and the choice is stored (`gb-motion`). With motion off, all of the above collapse to their end state instantly; scanlines and smooth scrolling turn off. This is a deliberate owner decision and departs from WCAG 2.3.3 (AAA); keep the motion small (no parallax, no large travel, nothing that flashes).
 
 ## 7. Theming
 

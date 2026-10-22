@@ -19,6 +19,8 @@ export const ui = {
   close: { en: 'Close', sk: 'Zavrieť' },
   langKey: { en: 'Switch to Slovak', sk: 'Prepnúť do angličtiny' },
   themeKey: { en: 'Switch theme', sk: 'Prepnúť tému' },
+  motionKey: { en: 'Turn animations on or off', sk: 'Zapnúť alebo vypnúť animácie' },
+  motion: { en: 'Motion', sk: 'Pohyb' },
   dark: { en: 'Dark', sk: 'Tmavá' },
   light: { en: 'Light', sk: 'Svetlá' },
   ok: { en: 'OK', sk: 'OK' },

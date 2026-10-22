@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 
 const SCRAMBLE = '#$%&*+=?@01<>/\\[]'
 
+/** True when the visitor switched animations off with F4. The OS
+ *  reduced-motion setting is deliberately not consulted; see MotionProvider. */
 export const reducedMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  typeof document !== 'undefined' && document.documentElement.dataset.motion === 'off'
 
 /** Adds `.in` once the element scrolls into view, then stops observing.
  *  Returns the ref plus whether it has fired, so children can key off it. */
