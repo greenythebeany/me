@@ -147,14 +147,28 @@ export function useScrollProgress() {
   return p
 }
 
-/** Live clock for the status bar, so the chrome is never quite static. */
-export function useClock() {
+/** The current time, re-read every `every` ms. */
+export function useNow(every = 1000) {
   const [now, setNow] = useState(() => new Date())
   useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000)
+    const id = setInterval(() => setNow(new Date()), every)
     return () => clearInterval(id)
-  }, [])
-  return now.toLocaleTimeString('sk-SK', { hour12: false })
+  }, [every])
+  return now
+}
+
+/** Binds a bare key (no modifiers) to `fn`, ignored while typing in a field. */
+export function useShortcut(key, fn) {
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== key || e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return
+      if (e.target.closest?.('input, textarea, select, [contenteditable="true"]')) return
+      e.preventDefault()
+      fn()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [key, fn])
 }
 
 /** Feeds the cursor position to a panel as --mx/--my for its glow layer. */

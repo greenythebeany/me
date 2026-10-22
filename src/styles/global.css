@@ -6,7 +6,9 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 132px;
+  /* lands anchor jumps just under the sticky bar */
+  scroll-padding-top: var(--bar-h);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -54,13 +56,27 @@ h3 {
   margin: 0;
   font-weight: 700;
   line-height: 1.12;
+  text-wrap: balance;
 }
 
 p {
   margin: 0;
+  text-wrap: pretty;
 }
 
-ul {
+dl,
+dd {
+  margin: 0;
+}
+
+a,
+button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+ul,
+ol {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -244,4 +260,39 @@ ul {
   body::before {
     display: none;
   }
+}
+
+/* ---------- accessibility helpers -------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: calc(var(--z-bar) + 1);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-control);
+  background: var(--bright);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: var(--fs-chrome);
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
+main:focus {
+  outline: none;
 }

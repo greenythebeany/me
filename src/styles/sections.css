@@ -2,7 +2,7 @@
 
 .section {
   /* the anchor offset lives on html's scroll-padding-top; setting it here too
-     would double it and land every jump 132px too low */
+     would double it */
   margin-top: var(--space-section);
 }
 
@@ -27,15 +27,20 @@
   border: 1px solid var(--rule);
   border-radius: 4px;
   color: var(--bright);
-  font-size: 0.66rem;
+  font-size: var(--fs-micro);
 }
 .section-head-right {
   color: var(--bright);
+  white-space: nowrap;
+}
+
+.section-intro {
+  margin-bottom: clamp(28px, 5vw, 46px);
 }
 
 .section-title {
   font-family: var(--mono);
-  font-size: clamp(1.9rem, 5.6vw, 3.1rem);
+  font-size: var(--fs-h2);
   letter-spacing: -0.02em;
   color: var(--ink);
 }
@@ -51,15 +56,16 @@
 .card p,
 .proj-desc,
 .check-list li,
-.edu-place {
+.edu-place,
+.sysinfo-top {
   font-family: var(--sans);
   color: var(--ink-soft);
 }
 
 .lead {
   max-width: var(--measure);
-  margin-bottom: clamp(28px, 5vw, 46px);
-  font-size: clamp(1.02rem, 2.2vw, 1.14rem);
+  margin-top: var(--space-5);
+  font-size: var(--fs-lead);
 }
 
 .card-head {
@@ -67,6 +73,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 14px;
+  margin: 0;
   padding: 11px 16px;
   border-bottom: 1px solid var(--rule-soft);
   background: var(--bg-raise);
@@ -74,8 +81,12 @@
   font-size: 0.7rem;
   color: var(--bright);
 }
-.card-head > span:first-child {
+.card-head > :first-child {
   flex-shrink: 0;
+}
+.card-head h3 {
+  font: inherit;
+  letter-spacing: inherit;
 }
 .card-head-dim {
   min-width: 0;
@@ -85,6 +96,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.inline-link {
+  color: var(--bright);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.inline-link:hover {
+  color: var(--hot);
 }
 
 /* ---------- buttons ---------------------------------------------------- */
@@ -102,16 +123,19 @@
   text-transform: uppercase;
   color: var(--mid);
   transition:
-    color 0.2s var(--ease),
-    border-color 0.2s var(--ease),
-    background 0.2s var(--ease),
-    transform 0.2s var(--ease);
+    color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
 }
 .btn:hover {
   color: var(--bright);
   border-color: var(--bright);
   background: var(--ghost);
   transform: translateY(-2px);
+}
+.btn:active {
+  transform: none;
 }
 .btn-primary {
   background: var(--bright);
@@ -130,6 +154,13 @@
   padding-top: clamp(48px, 9vw, 96px);
 }
 
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: end;
+}
+
 .hero-eyebrow {
   margin-bottom: 22px;
   color: var(--mid);
@@ -140,7 +171,7 @@
   flex-direction: column;
   gap: 2px;
   font-family: var(--mono);
-  font-size: clamp(2.3rem, 8.2vw, 5rem);
+  font-size: var(--fs-display);
   letter-spacing: -0.035em;
   color: var(--bright);
 }
@@ -160,7 +191,7 @@
   opacity: 0;
   transform: translateX(4px);
   pointer-events: none;
-  transition: opacity 0.2s var(--ease);
+  transition: opacity var(--dur-fast) var(--ease);
 }
 .hero-title:hover .hero-line::after {
   opacity: 0.75;
@@ -181,7 +212,7 @@
 .hero-lead {
   max-width: var(--measure);
   margin-top: clamp(24px, 4vw, 34px);
-  font-size: clamp(1.04rem, 2.3vw, 1.18rem);
+  font-size: var(--fs-lead);
   color: var(--ink-soft);
 }
 
@@ -192,32 +223,60 @@
   margin-top: clamp(28px, 4vw, 40px);
 }
 
-.hero-meta {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 1px;
-  margin: clamp(44px, 7vw, 76px) 0 0;
-  overflow: hidden;
-  background: var(--rule-soft);
+/* the "system information" panel */
+.sysinfo-list {
+  padding: var(--space-5) var(--space-5) var(--space-4);
 }
-.hero-meta-item {
-  padding: 18px 20px;
-  background: var(--bg-panel);
+.sysinfo-list .leader + .leader {
+  margin-top: var(--space-3);
 }
-.hero-meta-item dt {
+.sysinfo-list dt {
   color: var(--mid);
 }
-.hero-meta-item dd {
-  margin: 7px 0 0;
-  font-size: 0.88rem;
+.sysinfo-list dd {
   color: var(--ink);
+  text-align: right;
+}
+
+.sysinfo-stat {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  border-top: 1px dashed var(--rule-soft);
+}
+.sysinfo-num {
+  font-size: clamp(2.2rem, 4.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--bright);
+  font-variant-numeric: tabular-nums;
+}
+.sysinfo-stat .label {
+  margin-top: var(--space-2);
+}
+.sysinfo-top {
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+}
+.sysinfo-top a {
+  color: var(--bright);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.sysinfo-top a:hover {
+  color: var(--hot);
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- about ------------------------------------------------------ */
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 18px;
   align-items: start;
 }
@@ -229,11 +288,39 @@
 
 /* ---------- cv --------------------------------------------------------- */
 
+/* six columns: education and skills take half each, the three short blocks
+   below take a third each, so no row is left with a gap */
 .cv-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 18px;
   align-items: start;
+}
+.cv-grid > * {
+  grid-column: span 2;
+}
+.cv-grid > .cv-edu,
+.cv-grid > .cv-skills {
+  grid-column: span 3;
+}
+@media (max-width: 1020px) {
+  .cv-grid > * {
+    grid-column: span 3;
+  }
+  .cv-grid > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 680px) {
+  .cv-grid {
+    grid-template-columns: 1fr;
+  }
+  .cv-grid > *,
+  .cv-grid > .cv-edu,
+  .cv-grid > .cv-skills,
+  .cv-grid > :last-child {
+    grid-column: auto;
+  }
 }
 
 .cv-block > :not(.card-head) {
@@ -252,18 +339,34 @@
   border-top: 1px dashed var(--rule-soft);
 }
 .edu-role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
   font-weight: 600;
   color: var(--ink);
 }
+.edu-badge {
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: var(--bright);
+  color: var(--bg);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+}
 .edu-place {
   margin-top: 3px;
-  font-size: 0.94rem;
+  font-size: var(--fs-small);
 }
 .edu-when {
   margin-top: 7px;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   color: var(--mid);
+}
+
+.cert-list li + li {
+  margin-top: var(--space-4);
 }
 
 .skill + .skill {
@@ -298,11 +401,7 @@
   flex: 1;
   height: 100%;
   border: 1px solid var(--rule-soft);
-  background: repeating-linear-gradient(
-    to right,
-    var(--ghost) 0 6px,
-    transparent 6px 9px
-  );
+  background: repeating-linear-gradient(to right, var(--ghost) 0 6px, transparent 6px 9px);
 }
 .bar-fill {
   position: absolute;
@@ -310,11 +409,7 @@
   top: 1px;
   bottom: 1px;
   width: 0;
-  background: repeating-linear-gradient(
-    to right,
-    var(--bright) 0 6px,
-    transparent 6px 9px
-  );
+  background: repeating-linear-gradient(to right, var(--bright) 0 6px, transparent 6px 9px);
   transition: width 1s var(--ease) 0.15s;
 }
 .reveal.in .bar-fill {
@@ -326,6 +421,7 @@
   text-align: right;
   font-size: 0.72rem;
   color: var(--mid);
+  font-variant-numeric: tabular-nums;
 }
 
 .leader-list li + li {
@@ -337,6 +433,7 @@
 }
 .leader-val {
   color: var(--mid);
+  text-align: right;
 }
 
 .check-list li {
@@ -361,7 +458,7 @@
 
 .tt-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 18px;
   align-items: start;
 }
@@ -379,10 +476,29 @@
   border-left-color: var(--bright);
   background: var(--ghost);
 }
+.tt-slot.is-now {
+  box-shadow: inset 0 0 0 1px var(--bright);
+}
 .tt-time {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   color: var(--mid);
+  font-variant-numeric: tabular-nums;
+}
+.tt-flag {
+  margin-left: auto;
+  padding: 1px 7px;
+  border: 1px solid var(--bright);
+  border-radius: 4px;
+  color: var(--bright);
+  font-size: var(--fs-micro);
+}
+.tt-slot.is-now .tt-flag {
+  background: var(--bright);
+  color: var(--bg);
 }
 .tt-name {
   font-size: 0.98rem;
@@ -419,8 +535,18 @@
 
 .proj-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+}
+@media (max-width: 1020px) {
+  .proj-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .proj-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .proj {
@@ -428,53 +554,94 @@
   flex-direction: column;
   overflow: hidden;
   transition:
-    border-color 0.25s var(--ease),
-    transform 0.25s var(--ease),
-    box-shadow 0.25s var(--ease);
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
 }
-.proj:hover {
+.proj:hover,
+.proj:focus-within {
   border-color: var(--bright);
   transform: translateY(-3px);
   box-shadow: var(--shadow);
 }
 
 .proj-body {
-  position: relative;
   flex: 1;
-  padding: 22px 20px 24px;
-  overflow: hidden;
+  padding: 22px 20px 18px;
 }
 
 /* The oversized index, echoing the module cards on the GitHub profile. It
-   sits in the bottom corner and half-bleeds out, so it can never collide
-   with a long project title. */
+   sits top right beside the title, never under the copy. */
 .proj-ghost {
   position: absolute;
-  right: 6px;
-  bottom: -22px;
-  font-size: 5.4rem;
+  top: 46px;
+  right: 14px;
+  font-size: 3.4rem;
   font-weight: 700;
   line-height: 1;
   color: var(--ghost);
   pointer-events: none;
-  transition: transform 0.35s var(--ease);
+  transition: transform var(--dur-base) var(--ease);
 }
 .proj:hover .proj-ghost {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
 }
 
 .proj-title {
-  position: relative;
+  max-width: calc(100% - 4.5rem);
   font-family: var(--mono);
-  font-size: 1.34rem;
+  font-size: var(--fs-h3);
   letter-spacing: -0.01em;
   color: var(--bright);
 }
+/* the title link is stretched over the whole card, so the card is one target
+   while the accessible name stays just the project title */
+.proj-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.proj-link:focus-visible {
+  outline: none;
+}
+.proj:has(.proj-link:focus-visible) {
+  outline: 2px solid var(--bright);
+  outline-offset: 3px;
+}
 
 .proj-desc {
-  position: relative;
   margin-top: 12px;
-  font-size: 0.97rem;
+  font-size: var(--fs-small);
+}
+
+.proj-stats {
+  padding: 0 20px 18px;
+}
+.proj-activity {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 30px;
+}
+.proj-activity span {
+  flex: 1;
+  height: calc(4px + 26px * var(--h));
+  border-radius: 1px;
+  background: var(--ghost);
+}
+.proj-activity span.on {
+  background: var(--bright);
+}
+.proj-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-top: 10px;
+  font-size: 0.72rem;
+  color: var(--mid);
+  font-variant-numeric: tabular-nums;
 }
 
 .proj-foot {
@@ -482,38 +649,39 @@
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  white-space: nowrap;
   padding: 12px 20px;
   border-top: 1px solid var(--rule-soft);
   background: var(--bg-raise);
-  font-size: 0.66rem;
+  font-size: var(--fs-micro);
+  white-space: nowrap;
 }
 .proj-open {
   color: var(--mid);
   transition:
-    color 0.2s var(--ease),
-    transform 0.25s var(--ease);
-}
-.proj:hover .proj-open {
-  transform: translateX(3px);
+    color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
 }
 .proj:hover .proj-open {
   color: var(--bright);
+  transform: translateX(3px);
 }
-.proj-host {
+/* sits above the stretched card link so it stays clickable on its own */
+.proj-site {
+  position: relative;
+  z-index: 2;
   color: var(--mid);
-  text-transform: none;
-  letter-spacing: 0.04em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.proj-site:hover {
+  color: var(--bright);
 }
 
-@media (max-width: 520px) {
-  .proj-ghost {
-    display: none;
-  }
-  .proj-host {
-    display: none;
-  }
+.proj-after {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 }

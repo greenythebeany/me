@@ -9,7 +9,7 @@
   --sans: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* chrome type is small, uppercase and letterspaced; body type is not */
-  --fs-display: clamp(2.3rem, 8.2vw, 5rem);
+  --fs-display: clamp(2.3rem, 5.4vw, 4.4rem);
   --fs-h2: clamp(1.9rem, 5.6vw, 3.1rem);
   --fs-h3: 1.34rem;
   --fs-lead: clamp(1.02rem, 2.2vw, 1.16rem);
@@ -38,6 +38,7 @@
   --radius-control: 8px;
   --maxw: 1180px;
   --gutter: clamp(16px, 4vw, 40px);
+  --bar-h: 128px;
 
   /* ---------- motion ---------- */
   --ease: cubic-bezier(0.22, 0.68, 0.24, 1);

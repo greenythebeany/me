@@ -1,23 +1,45 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useLang } from '../i18n'
 import { useTheme } from '../theme'
-import { useClock, useScrollProgress, useScrollSpy } from '../hooks'
-import { nav, site } from '../data/content'
+import { useNow, useScrollProgress, useScrollSpy, useShortcut } from '../hooks'
+import { nav, site, ui } from '../data/content'
 
 const IDS = nav.map((n) => n.id)
+const CLOCK = new Intl.DateTimeFormat('sk-SK', {
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+  timeZone: 'Europe/Bratislava',
+})
+
+/** Ticks on its own so the rest of the bar doesn't re-render every second. */
+function Clock() {
+  const { t } = useLang()
+  const now = useNow(1000)
+  return (
+    <time className="statusline-clock" dateTime={now.toISOString()} aria-label={t(ui.clock)}>
+      {CLOCK.format(now)}
+    </time>
+  )
+}
 
 export default function TopBar() {
   const { lang, toggle: toggleLang, t } = useLang()
   const { theme, toggle: toggleTheme } = useTheme()
   const active = useScrollSpy(IDS)
-  const clock = useClock()
   const progress = useScrollProgress()
   const [open, setOpen] = useState(false)
   const current = nav.find((n) => n.id === active) ?? nav[0]
 
+  // the F-keys printed on the bar actually work
+  useShortcut('F2', toggleLang)
+  useShortcut('F3', toggleTheme)
+
   // A single pill slides between menu items rather than each item painting
   // its own background, so switching sections reads as one movement.
   const menuRef = useRef(null)
+  const burgerRef = useRef(null)
   const [pill, setPill] = useState(null)
 
   const measure = useCallback(() => {
@@ -38,10 +60,20 @@ export default function TopBar() {
   }, [measure])
 
   useEffect(() => {
+    if (!open) return
     const close = () => setOpen(false)
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      burgerRef.current?.focus()
+    }
     window.addEventListener('resize', close)
-    return () => window.removeEventListener('resize', close)
-  }, [])
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('resize', close)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open])
 
   return (
     <header className="topbar">
@@ -51,14 +83,16 @@ export default function TopBar() {
       <div className="statusline">
         <div className="shell statusline-row chrome">
           <span className="statusline-brand">
-            {site.name} (TM)
-            <span className="statusline-sep">·</span>
+            <span translate="no">{site.name}</span> (TM)
+            <span className="statusline-sep" aria-hidden="true">
+              ·
+            </span>
             <span className="statusline-muted">{site.realName}</span>
           </span>
           <span className="statusline-cells">
-            <span className="statusline-muted">{site.location}</span>
+            <span className="statusline-muted">{t(site.location)}</span>
             <span>VER {site.version}</span>
-            <span className="statusline-clock">{clock}</span>
+            <Clock />
           </span>
         </div>
       </div>
@@ -66,17 +100,17 @@ export default function TopBar() {
       {/* the setup menu */}
       <div className="shell">
         <div className="menubar panel">
-          {/* on narrow screens the menu collapses, so the bar still needs to
-              say where you are */}
-          <span className="menu-current chrome">
+          {/* on narrow screens the menu collapses, so the bar still says where you are */}
+          <span className="menu-current chrome" aria-hidden="true">
             <span className="menu-num">{current.num}</span>
             {t(current.label)}
           </span>
 
           <nav
+            id="site-menu"
             ref={menuRef}
             className={`menu${open ? ' open' : ''}`}
-            aria-label="Sections"
+            aria-label={t(ui.sections)}
             onScroll={measure}
           >
             {pill && (
@@ -91,31 +125,37 @@ export default function TopBar() {
                 key={item.id}
                 href={`#${item.id}`}
                 className={`menu-item${active === item.id ? ' active' : ''}`}
-                aria-current={active === item.id ? 'true' : undefined}
+                aria-current={active === item.id ? 'location' : undefined}
                 onClick={() => setOpen(false)}
               >
-                <span className="menu-num">{item.num}</span>
+                <span className="menu-num" aria-hidden="true">
+                  {item.num}
+                </span>
                 <span className="menu-label">{t(item.label)}</span>
               </a>
             ))}
           </nav>
 
           <div className="menu-actions">
-            <button className="key" onClick={toggleLang} aria-label="Toggle language">
+            <button className="key" type="button" onClick={toggleLang} aria-keyshortcuts="F2">
               <span className="key-cap">F2</span>
               {lang.toUpperCase()}
+              <span className="sr-only"> — {t(ui.langKey)}</span>
             </button>
-            <button className="key" onClick={toggleTheme} aria-label="Toggle theme">
+            <button className="key" type="button" onClick={toggleTheme} aria-keyshortcuts="F3">
               <span className="key-cap">F3</span>
-              {theme === 'dark' ? 'DARK' : 'LIGHT'}
+              {t(theme === 'dark' ? ui.dark : ui.light)}
+              <span className="sr-only"> — {t(ui.themeKey)}</span>
             </button>
             <button
+              ref={burgerRef}
               className="key burger"
+              type="button"
               onClick={() => setOpen((o) => !o)}
               aria-expanded={open}
-              aria-label="Toggle menu"
+              aria-controls="site-menu"
             >
-              {open ? 'ESC' : 'MENU'}
+              {t(open ? ui.close : ui.menu)}
             </button>
           </div>
         </div>

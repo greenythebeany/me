@@ -1,38 +1,38 @@
 import { useEffect, useState } from 'react'
 import { useLang } from '../i18n'
+import { reducedMotion } from '../hooks'
 import { boot, site } from '../data/content'
 
 const KEY = 'gb-booted'
 const STEP = 190
 
-/** A short POST sequence on first load. Runs once per tab, is skippable with
- *  a click or any key, and is bypassed entirely for reduced-motion users. */
-export default function Boot() {
-  const { t } = useLang()
+/** Runs once per tab and never under reduced motion. */
+export function shouldBoot() {
+  try {
+    if (sessionStorage.getItem(KEY)) return false
+  } catch {}
+  return !reducedMotion()
+}
 
-  const [done, setDone] = useState(() => {
-    try {
-      if (sessionStorage.getItem(KEY)) return true
-    } catch {}
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  })
+/** A short POST sequence on first load, skippable with a click or any key. */
+export default function Boot({ onDone }) {
+  const { t } = useLang()
   const [step, setStep] = useState(0)
+  const total = boot.lines.length + 1
 
   useEffect(() => {
-    if (done) return
     const finish = () => {
       try {
         sessionStorage.setItem(KEY, '1')
       } catch {}
-      setDone(true)
+      onDone()
     }
 
-    if (step >= boot.length) {
-      const id = setTimeout(finish, 420)
-      return () => clearTimeout(id)
-    }
+    const id =
+      step >= total
+        ? setTimeout(finish, 420)
+        : setTimeout(() => setStep((s) => s + 1), step === 0 ? 260 : STEP)
 
-    const id = setTimeout(() => setStep((s) => s + 1), step === 0 ? 260 : STEP)
     window.addEventListener('keydown', finish)
     window.addEventListener('pointerdown', finish)
     return () => {
@@ -40,30 +40,30 @@ export default function Boot() {
       window.removeEventListener('keydown', finish)
       window.removeEventListener('pointerdown', finish)
     }
-  }, [step, done])
+  }, [step, total, onDone])
 
   useEffect(() => {
-    document.body.style.overflow = done ? '' : 'hidden'
+    document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = ''
     }
-  }, [done])
-
-  if (done) return null
+  }, [])
 
   return (
-    <div className="boot" role="status" aria-live="polite">
+    <div className="boot" aria-hidden="true">
       <div className="boot-inner mono">
-        {boot.slice(0, step).map((line, i) => (
-          <div key={i} className="boot-line">
-            {t(line)}
+        {step > 0 && <div className="boot-line boot-banner">{t(boot.banner)}</div>}
+        {boot.lines.slice(0, Math.max(0, step - 1)).map((line, i) => (
+          <div key={i} className="boot-line leader">
+            <span>{t(line.text)}</span>
+            <span className="boot-ok">{t(line.status)}</span>
           </div>
         ))}
         <div className="boot-line boot-cursor">
           {site.name.toUpperCase()} <span className="caret">&nbsp;</span>
         </div>
       </div>
-      <div className="boot-skip label">press any key to skip</div>
+      <div className="boot-skip label">{t(boot.skip)}</div>
     </div>
   )
 }

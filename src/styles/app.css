@@ -36,6 +36,13 @@
   }
 }
 
+.boot-banner {
+  color: var(--ink);
+}
+.boot-ok {
+  color: var(--bright);
+}
+
 .boot-cursor {
   color: var(--bright);
 }

@@ -1,5 +1,5 @@
 import { useLang } from '../i18n'
-import { footer, site } from '../data/content'
+import { footer, site, ui } from '../data/content'
 
 export default function Footer() {
   const { t } = useLang()
@@ -8,23 +8,25 @@ export default function Footer() {
     <footer className="footbar">
       <div className="shell">
         <div className="footbar-panel panel">
-          <div className="footbar-prompt mono">
+          <p className="footbar-prompt mono" aria-hidden="true">
             C:\USERS\GREENYBEANY&gt;<span className="caret">&nbsp;</span>
-          </div>
+          </p>
           <p className="footbar-note label">{t(footer.halted)}</p>
         </div>
 
         <div className="footbar-meta chrome">
           <span>
-            © {new Date().getFullYear()} {site.name}
+            © {new Date().getFullYear()} {site.realName}
           </span>
           <span className="footbar-links">
             <a href={site.github} target="_blank" rel="noopener">
-              GitHub
+              {t(footer.github)}
+              <span className="sr-only"> {t(ui.newTab)}</span>
             </a>
-            <a href={site.cv} target="_blank" rel="noopener">
+            <a href={site.cv} download>
               {t(footer.cvLink)}
             </a>
+            <a href="#main">{t(footer.top)}</a>
           </span>
           <span>{site.version}</span>
         </div>

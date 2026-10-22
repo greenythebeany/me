@@ -1,7 +1,7 @@
 import Section from './Section'
 import { useLang } from '../i18n'
 import { trackGlow, useReveal } from '../hooks'
-import { about } from '../data/content'
+import { about, ui } from '../data/content'
 
 function Card({ card, index, delay }) {
   const { t } = useLang()
@@ -14,8 +14,10 @@ function Card({ card, index, delay }) {
       onPointerMove={trackGlow}
     >
       <header className="card-head chrome">
-        <span>{t(card.title)}</span>
-        <span className="card-head-dim">SLOT {String(index + 1).padStart(2, '0')}</span>
+        <h3>{t(card.title)}</h3>
+        <span className="card-head-dim" aria-hidden="true">
+          SLOT {String(index + 1).padStart(2, '0')}
+        </span>
       </header>
       <p>{t(card.body)}</p>
     </article>
@@ -24,7 +26,6 @@ function Card({ card, index, delay }) {
 
 export default function About() {
   const { t } = useLang()
-  const [ref] = useReveal()
 
   return (
     <Section
@@ -33,11 +34,9 @@ export default function About() {
       eyebrow={about.eyebrow}
       title={about.title}
       titleEm={about.titleEm}
+      status={t(ui.ok)}
+      lead={about.lead}
     >
-      <p ref={ref} className="lead reveal" style={{ '--delay': '80ms' }}>
-        {t(about.lead)}
-      </p>
-
       <div className="card-grid">
         {about.cards.map((c, i) => (
           <Card key={c.id} card={c} index={i} delay={i * 90} />
