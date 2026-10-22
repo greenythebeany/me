@@ -6,7 +6,7 @@
 :root {
   /* ---------- type ---------- */
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --sans: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* chrome type is small, uppercase and letterspaced; body type is not */
   --fs-display: clamp(2.3rem, 8.2vw, 5rem);
