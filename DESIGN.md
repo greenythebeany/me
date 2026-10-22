@@ -75,7 +75,7 @@ Two families with strictly separate jobs:
 
 | Token | Value | Used for |
 |---|---|---|
-| `--fs-display` | `clamp(2.3rem, 8.2vw, 5rem)` | Hero title only. Mono 700, tracking −0.035em |
+| `--fs-display` | `clamp(2.2rem, 4.4vw, 3.8rem)` | Hero title only. Mono 700, tracking −0.035em |
 | `--fs-h2` | `clamp(1.9rem, 5.6vw, 3.1rem)` | Section titles. Mono 700, tracking −0.02em |
 | `--fs-h3` | `1.34rem` | Project titles. Mono 700 |
 | `--fs-lead` | `clamp(1.02rem, 2.2vw, 1.16rem)` | Lead paragraphs. Sans |

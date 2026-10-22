@@ -9,7 +9,7 @@
   --sans: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* chrome type is small, uppercase and letterspaced; body type is not */
-  --fs-display: clamp(2.3rem, 5.4vw, 4.4rem);
+  --fs-display: clamp(2.2rem, 4.4vw, 3.8rem);
   --fs-h2: clamp(1.9rem, 5.6vw, 3.1rem);
   --fs-h3: 1.34rem;
   --fs-lead: clamp(1.02rem, 2.2vw, 1.16rem);
