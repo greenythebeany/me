@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T20:48:08.896Z",
+  "generatedAt": "2026-10-22T20:52:47.041Z",
   "days": 90,
   "repos": [
     {
@@ -128,21 +128,21 @@
       ]
     },
     {
-      "name": "AkoSUmelou",
-      "url": "https://github.com/greenythebeany/AkoSUmelou",
+      "name": "blesk",
+      "url": "https://github.com/greenythebeany/blesk",
       "homepage": null,
-      "description": "Bezplatný kurz umelej inteligencie v slovenčine pre úplných začiatočníkov (ChatGPT, Claude, Gemini)",
-      "language": "JavaScript",
+      "description": "Redesign concept of the BLESK Servis (bleskservis.sk) home appliance sales & repair site.",
+      "language": "CSS",
       "stars": 0,
-      "pushedAt": "2026-08-31T09:24:24Z",
-      "commits": 6,
+      "pushedAt": "2026-08-23T13:12:26Z",
+      "commits": 3,
       "weeks": [
         0,
         0,
         0,
         0,
+        3,
         0,
-        6,
         0,
         0,
         0,
