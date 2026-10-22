@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "repos": "node scripts/fetch-repos.mjs",
+    "prebuild": "node scripts/fetch-repos.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
