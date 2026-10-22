@@ -303,19 +303,26 @@
 
   .menubar {
     position: relative;
-    flex-wrap: wrap;
   }
 
+  /* drops down over the page instead of growing the sticky bar, so opening
+     it never pushes the content underneath */
   .menu {
     display: none;
-    order: 3;
-    width: 100%;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 1;
     flex-direction: column;
     align-items: stretch;
     gap: 2px;
-    padding-top: 8px;
-    margin-top: 6px;
-    border-top: 1px solid var(--rule-soft);
+    padding: 6px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--bg-panel);
+    box-shadow: var(--shadow);
+    overscroll-behavior: contain;
   }
   /* the panel unrolls downward, then each entry types in after the last,
      like a BIOS submenu being drawn line by line */

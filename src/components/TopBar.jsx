@@ -70,11 +70,17 @@ export default function TopBar() {
       setOpen(false)
       burgerRef.current?.focus()
     }
+    // a tap anywhere outside the bar closes the dropdown
+    const onDown = (e) => {
+      if (!e.target.closest('.menubar')) setOpen(false)
+    }
     window.addEventListener('resize', close)
     window.addEventListener('keydown', onKey)
+    window.addEventListener('pointerdown', onDown)
     return () => {
       window.removeEventListener('resize', close)
       window.removeEventListener('keydown', onKey)
+      window.removeEventListener('pointerdown', onDown)
     }
   }, [open])
 
