@@ -3,7 +3,7 @@
 .section {
   /* the anchor offset lives on html's scroll-padding-top; setting it here too
      would double it and land every jump 132px too low */
-  margin-top: clamp(72px, 12vw, 148px);
+  margin-top: var(--space-section);
 }
 
 .section-head {
@@ -94,8 +94,8 @@
   align-items: center;
   gap: 12px;
   padding: 13px 20px;
-  border: 1px solid var(--rule);
-  border-radius: 8px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
   font-family: var(--mono);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
@@ -501,7 +501,7 @@
   color: var(--bright);
 }
 .proj-host {
-  color: var(--faint);
+  color: var(--mid);
   text-transform: none;
   letter-spacing: 0.04em;
   overflow: hidden;

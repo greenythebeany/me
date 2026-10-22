@@ -3,7 +3,7 @@
 .boot {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: var(--z-boot);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,7 +46,7 @@
   right: 0;
   bottom: clamp(20px, 5vh, 44px);
   text-align: center;
-  color: var(--faint);
+  color: var(--mid);
 }
 
 /* ---------- top bar ---------------------------------------------------- */
@@ -54,7 +54,7 @@
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 90;
+  z-index: var(--z-bar);
   padding-bottom: 12px;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(12px);
@@ -205,7 +205,7 @@
   align-items: center;
   gap: 7px;
   padding: 8px 11px;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-strong);
   border-radius: 7px;
   font-family: var(--mono);
   font-size: 0.7rem;
@@ -225,7 +225,7 @@
   padding: 1px 4px;
   border-radius: 3px;
   background: var(--ghost);
-  color: var(--dim);
+  color: var(--mid);
   font-size: 0.62rem;
 }
 
