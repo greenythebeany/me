@@ -29,15 +29,15 @@ Each theme has the same token names, so components never branch on theme. Contra
 | `--bg-raise` | Raised Bezel | `#121a10` | Panel header strips and footers |
 | `--ghost` | Burn-in | `#1a2a17` | Hover wash, lab-slot fill, key caps, oversized ghost numerals |
 | `--faint` | Deep Moss | `#1f3a1a` | **Decorative only** (1.6:1). Never text |
-| `--dim` | Low Phosphor | `#2f6b26` | **Decorative only** (3.0:1). Glitch ghost, inactive marks. Never text |
-| `--mid` | Signal Green | `#5fbf4f` | Secondary text: labels, dates, metadata (8.4:1) |
-| `--bright` | P1 Phosphor | `#41ff3a` | Accent: headings' emphasis, active states, primary button fill, focus ring (14.4:1) |
-| `--hot` | Overdriven Phosphor | `#b6ffaf` | Primary button hover |
+| `--dim` | Low Phosphor | `#2f5f29` | **Decorative only** (2.6:1). Glitch ghost, inactive marks. Never text |
+| `--mid` | Signal Green | `#6aae5c` | Secondary text: labels, dates, metadata (7.2:1) |
+| `--bright` | P1 Phosphor | `#8fd67f` | Accent: headings' emphasis, active states, primary button fill, focus ring (11.2:1) |
+| `--hot` | Overdriven Phosphor | `#c8eabf` | Primary button hover |
 | `--ink` | Pale Phosphor | `#dcf2d5` | Primary text (16.4:1) |
 | `--ink-soft` | Faded Phosphor | `#a3c49a` | Body copy, descriptions (10.1:1) |
 | `--rule` | Circuit Trace | `#284d22` | Panel borders, dividers (decorative, 2.0:1) |
 | `--rule-soft` | Faint Trace | `#1a2a17` | Inner dividers, hairlines |
-| `--rule-strong` | Live Trace | `#3f8a35` | Borders of interactive controls: buttons, keys (4.5:1, meets the 3:1 non-text rule) |
+| `--rule-strong` | Live Trace | `#447d3c` | Borders of interactive controls: buttons, keys (3.9:1, meets the 3:1 non-text rule) |
 
 ### Light
 
