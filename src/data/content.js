@@ -416,14 +416,6 @@ export const projects = {
         sk: 'Interaktívny rozvrh pre študentov FEI STU: naimportuješ Excel export z AIS-u, presunieš cvičenia do termínov, ktoré chceš, a výsledok exportuješ do PDF.',
       },
     },
-    blesk: {
-      title: 'BLESK redesign',
-      tag: 'Web · Concept',
-      desc: {
-        en: 'A redesign concept for BLESK Servis, a home-appliance sales and repair shop.',
-        sk: 'Koncept redizajnu stránky BLESK Servis, predajne a servisu domácich spotrebičov.',
-      },
-    },
   },
 }
 
