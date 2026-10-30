@@ -1,21 +1,20 @@
 {
-  "generatedAt": "2026-10-22T20:56:18.021Z",
+  "generatedAt": "2026-10-30T11:58:51.789Z",
   "days": 90,
   "repos": [
     {
-      "name": "jellywave",
-      "url": "https://github.com/greenythebeany/jellywave",
-      "homepage": null,
-      "description": null,
+      "name": "triptych",
+      "url": "https://github.com/greenythebeany/triptych",
+      "homepage": "https://greenybeany.dev/triptych/",
+      "description": "Free, open-source music app for your own Jellyfin server. Spotify, Apple Music or Nothing style, synced lyrics, offline downloads, stats & Wrapped. Windows, Linux, Android and iPhone.",
       "language": "JavaScript",
       "stars": 0,
-      "pushedAt": "2026-10-21T12:11:07Z",
-      "commits": 123,
+      "pushedAt": "2026-10-29T11:40:06Z",
+      "commits": 169,
       "weeks": [
+        51,
+        40,
         0,
-        47,
-        43,
-        1,
         2,
         0,
         0,
@@ -24,13 +23,14 @@
         0,
         0,
         14,
-        14
+        26,
+        34
       ]
     },
     {
       "name": "BeanyIK",
       "url": "https://github.com/greenythebeany/BeanyIK",
-      "homepage": null,
+      "homepage": "http://greenybeany.dev/BeanyIK/",
       "description": "Drag & drop robot kinematics builder — DH / custom matrices, forward & inverse kinematics (Electron)",
       "language": "JavaScript",
       "stars": 0,
@@ -47,9 +47,34 @@
         0,
         0,
         0,
-        0,
         28,
+        0,
         0
+      ]
+    },
+    {
+      "name": "BeanyDrive",
+      "url": "https://github.com/greenythebeany/BeanyDrive",
+      "homepage": null,
+      "description": null,
+      "language": "JavaScript",
+      "stars": 0,
+      "pushedAt": "2026-10-29T09:20:22Z",
+      "commits": 24,
+      "weeks": [
+        0,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        17
       ]
     },
     {
@@ -72,47 +97,21 @@
         0,
         0,
         0,
-        0,
-        0,
-        23
-      ]
-    },
-    {
-      "name": "BeanyDrive",
-      "url": "https://github.com/greenythebeany/BeanyDrive",
-      "homepage": null,
-      "description": null,
-      "language": "JavaScript",
-      "stars": 0,
-      "pushedAt": "2026-08-12T21:02:26Z",
-      "commits": 18,
-      "weeks": [
-        11,
-        0,
-        7,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+        1,
+        22,
         0
       ]
     },
     {
-      "name": "BetterAis",
-      "url": "https://github.com/greenythebeany/BetterAis",
+      "name": "triptych-social",
+      "url": "https://github.com/greenythebeany/triptych-social",
       "homepage": null,
-      "description": "BetterAis is a Chrome extension that visually customizes the is.stuba.sk website",
-      "language": "CSS",
-      "stars": 2,
-      "pushedAt": "2026-10-19T14:43:41Z",
-      "commits": 6,
+      "description": "Instagram reels for Triptych and the workflow that posts them",
+      "language": "Python",
+      "stars": 0,
+      "pushedAt": "2026-10-30T08:43:19Z",
+      "commits": 13,
       "weeks": [
-        4,
         0,
         0,
         0,
@@ -121,10 +120,11 @@
         0,
         0,
         0,
-        1,
         0,
         0,
-        1
+        0,
+        0,
+        13
       ]
     },
     {
@@ -140,8 +140,8 @@
         0,
         0,
         0,
-        0,
         3,
+        0,
         0,
         0,
         0,
