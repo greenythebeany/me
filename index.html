@@ -4,22 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Matúš Ondrejka (GreenyBeany) — Robotics &amp; Cybernetics</title>
-    <meta
-      name="description"
-      content="Matúš Ondrejka (GreenyBeany): Ing. student of Robotics &amp; Cybernetics at STU FEI Bratislava. Embedded systems, robotics, control and the desktop apps I'm building right now."
-    />
+    <title>GreenyBeany (Greeny Beany) · Matúš Ondrejka</title>
+    <meta name="description" content="Matúš Ondrejka, aka GreenyBeany (Greeny Beany): robotics student at STU FEI building Triptych, BeanyDrive, BeanyBox, BetterAIS and more." />
     <link rel="canonical" href="https://greenybeany.dev/me/" />
     <link rel="alternate" hreflang="en" href="https://greenybeany.dev/me/" />
     <link rel="alternate" hreflang="sk" href="https://greenybeany.dev/me/" />
 
     <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="GreenyBeany" />
-    <meta property="og:title" content="Matúš Ondrejka (GreenyBeany) — Robotics &amp; Cybernetics" />
-    <meta
-      property="og:description"
-      content="Ing. student of Robotics &amp; Cybernetics at STU FEI. Embedded systems, robotics and the projects I'm most active on."
-    />
+    <meta property="og:title" content="GreenyBeany (Greeny Beany) · Matúš Ondrejka" />
+    <meta property="og:description" content="Matúš Ondrejka, aka GreenyBeany (Greeny Beany): robotics student at STU FEI building Triptych, BeanyDrive, BeanyBox, BetterAIS and more." />
     <meta property="og:url" content="https://greenybeany.dev/me/" />
     <meta property="og:image" content="https://greenybeany.dev/me/og.png" />
     <meta property="og:image:width" content="1200" />
@@ -28,12 +22,38 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="sk_SK" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Matúš Ondrejka (GreenyBeany) — Robotics &amp; Cybernetics" />
-    <meta
-      name="twitter:description"
-      content="Ing. student of Robotics &amp; Cybernetics at STU FEI. Embedded systems, robotics and the projects I'm most active on."
-    />
+    <meta name="twitter:title" content="GreenyBeany (Greeny Beany) · Matúš Ondrejka" />
+    <meta name="twitter:description" content="Matúš Ondrejka, aka GreenyBeany (Greeny Beany): robotics student at STU FEI building Triptych, BeanyDrive, BeanyBox, BetterAIS and more." />
     <meta name="twitter:image" content="https://greenybeany.dev/me/og.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://greenybeany.dev/me/#person",
+            "name": "Matúš Ondrejka",
+            "alternateName": ["GreenyBeany", "Greeny Beany"],
+            "url": "https://greenybeany.dev/me/",
+            "image": "https://greenybeany.dev/me/og.png",
+            "jobTitle": "Robotics & Cybernetics student",
+            "affiliation": { "@type": "CollegeOrUniversity", "name": "STU FEI Bratislava" },
+            "sameAs": ["https://github.com/greenythebeany", "https://greenybeany.dev/triptych/"]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://greenybeany.dev/triptych/#app",
+            "name": "Triptych",
+            "url": "https://greenybeany.dev/triptych/",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Windows, Linux, Android, iOS",
+            "author": { "@id": "https://greenybeany.dev/me/#person" },
+            "sameAs": ["https://github.com/greenythebeany/triptych", "https://www.instagram.com/triptych.app"]
+          }
+        ]
+      }
+    </script>
 
     <link rel="icon" href="/me/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/me/favicon-32.png" sizes="32x32" type="image/png" />
@@ -70,7 +90,15 @@
         <h1>Matúš Ondrejka (GreenyBeany)</h1>
         <p>Ing. student of Robotics &amp; Cybernetics at STU FEI Bratislava. This site needs JavaScript for the full version.</p>
         <p lang="sk">Inžiniersky študent robotiky a kybernetiky na STU FEI v Bratislave. Plná verzia stránky potrebuje JavaScript.</p>
-        <p><a href="https://github.com/Greenythebeany">GitHub</a> · <a href="/me/cv.pdf">CV (PDF)</a></p>
+        <h2>Projects</h2>
+        <ul>
+          <li><a href="https://greenybeany.dev/triptych/">Triptych, a Jellyfin music player</a> (<a href="https://www.instagram.com/triptych.app">Triptych on Instagram</a>)</li>
+          <li><a href="https://github.com/greenythebeany/BeanyDrive">BeanyDrive, Discord-backed cloud storage</a></li>
+          <li><a href="https://github.com/greenythebeany/BeanyBox">BeanyBox, a terminal-styled Gmail client</a></li>
+          <li><a href="https://github.com/greenythebeany/BetterAis">BetterAIS, a calmer look for is.stuba.sk</a></li>
+          <li><a href="https://github.com/greenythebeany/BeanyIK">BeanyIK, a robot kinematics builder</a></li>
+        </ul>
+        <p><a href="https://github.com/greenythebeany">GreenyBeany on GitHub</a> · <a href="/me/cv.pdf">CV (PDF)</a></p>
       </div>
     </noscript>
     <script type="module" src="/src/main.jsx"></script>

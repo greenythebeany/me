@@ -23,6 +23,11 @@ export default function Footer() {
               {t(footer.github)}
               <span className="sr-only"> {t(ui.newTab)}</span>
             </a>
+            <a href={site.triptych}>{t(footer.triptych)}</a>
+            <a href={site.triptychInstagram} target="_blank" rel="noopener">
+              {t(footer.triptychInstagram)}
+              <span className="sr-only"> {t(ui.newTab)}</span>
+            </a>
             <a href={site.cv} download>
               {t(footer.cvLink)}
             </a>

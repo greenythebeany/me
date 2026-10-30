@@ -9,6 +9,8 @@ export const site = {
   version: 'V5.0',
   location: { en: 'Bratislava, SK', sk: 'Bratislava, SK' },
   github: 'https://github.com/Greenythebeany',
+  triptych: 'https://greenybeany.dev/triptych/',
+  triptychInstagram: 'https://www.instagram.com/triptych.app',
   cv: `${import.meta.env.BASE_URL}cv.pdf`,
 }
 
@@ -415,14 +417,6 @@ export const projects = {
         sk: 'Interaktívny rozvrh pre študentov FEI STU: naimportuješ Excel export z AIS-u, presunieš cvičenia do termínov, ktoré chceš, a výsledok exportuješ do PDF.',
       },
     },
-    blesk: {
-      title: 'BLESK redesign',
-      tag: 'Web · Concept',
-      desc: {
-        en: 'A redesign concept for BLESK Servis, a home-appliance sales and repair shop.',
-        sk: 'Koncept redizajnu stránky BLESK Servis, predajne a servisu domácich spotrebičov.',
-      },
-    },
   },
 }
 
@@ -430,5 +424,7 @@ export const footer = {
   halted: { en: 'Thanks for stopping by — system halted', sk: 'Vďaka za návštevu — systém zastavený' },
   cvLink: { en: 'CV', sk: 'CV' },
   github: { en: 'GitHub', sk: 'GitHub' },
+  triptych: { en: 'Triptych music player', sk: 'Hudobný prehrávač Triptych' },
+  triptychInstagram: { en: 'Triptych on Instagram', sk: 'Triptych na Instagrame' },
   top: { en: 'Back to top', sk: 'Späť hore' },
 }

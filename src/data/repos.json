@@ -1,21 +1,20 @@
 {
-  "generatedAt": "2026-10-22T20:56:18.021Z",
+  "generatedAt": "2026-10-30T12:04:09.177Z",
   "days": 90,
   "repos": [
     {
-      "name": "jellywave",
-      "url": "https://github.com/greenythebeany/jellywave",
-      "homepage": null,
-      "description": null,
+      "name": "triptych",
+      "url": "https://github.com/greenythebeany/triptych",
+      "homepage": "https://greenybeany.dev/triptych/",
+      "description": "Free, open-source music app for your own Jellyfin server. Spotify, Apple Music or Nothing style, synced lyrics, offline downloads, stats & Wrapped. Windows, Linux, Android and iPhone.",
       "language": "JavaScript",
       "stars": 0,
-      "pushedAt": "2026-10-21T12:11:07Z",
-      "commits": 123,
+      "pushedAt": "2026-10-29T11:40:06Z",
+      "commits": 169,
       "weeks": [
+        51,
+        40,
         0,
-        47,
-        43,
-        1,
         2,
         0,
         0,
@@ -24,13 +23,14 @@
         0,
         0,
         14,
-        14
+        28,
+        32
       ]
     },
     {
       "name": "BeanyIK",
       "url": "https://github.com/greenythebeany/BeanyIK",
-      "homepage": null,
+      "homepage": "http://greenybeany.dev/BeanyIK/",
       "description": "Drag & drop robot kinematics builder — DH / custom matrices, forward & inverse kinematics (Electron)",
       "language": "JavaScript",
       "stars": 0,
@@ -47,9 +47,34 @@
         0,
         0,
         0,
-        0,
         28,
+        0,
         0
+      ]
+    },
+    {
+      "name": "BeanyDrive",
+      "url": "https://github.com/greenythebeany/BeanyDrive",
+      "homepage": null,
+      "description": null,
+      "language": "JavaScript",
+      "stars": 0,
+      "pushedAt": "2026-10-29T09:20:22Z",
+      "commits": 24,
+      "weeks": [
+        0,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        17
       ]
     },
     {
@@ -72,76 +97,25 @@
         0,
         0,
         0,
-        0,
-        0,
-        23
-      ]
-    },
-    {
-      "name": "BeanyDrive",
-      "url": "https://github.com/greenythebeany/BeanyDrive",
-      "homepage": null,
-      "description": null,
-      "language": "JavaScript",
-      "stars": 0,
-      "pushedAt": "2026-08-12T21:02:26Z",
-      "commits": 18,
-      "weeks": [
-        11,
-        0,
-        7,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    {
-      "name": "BetterAis",
-      "url": "https://github.com/greenythebeany/BetterAis",
-      "homepage": null,
-      "description": "BetterAis is a Chrome extension that visually customizes the is.stuba.sk website",
-      "language": "CSS",
-      "stars": 2,
-      "pushedAt": "2026-10-19T14:43:41Z",
-      "commits": 6,
-      "weeks": [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         1,
-        0,
-        0,
-        1
+        22,
+        0
       ]
     },
     {
-      "name": "blesk",
-      "url": "https://github.com/greenythebeany/blesk",
+      "name": "triptych-social",
+      "url": "https://github.com/greenythebeany/triptych-social",
       "homepage": null,
-      "description": "Redesign concept of the BLESK Servis (bleskservis.sk) home appliance sales & repair site.",
-      "language": "CSS",
+      "description": "Instagram reels for Triptych and the workflow that posts them",
+      "language": "Python",
       "stars": 0,
-      "pushedAt": "2026-08-23T13:12:26Z",
-      "commits": 3,
+      "pushedAt": "2026-10-30T08:43:19Z",
+      "commits": 13,
       "weeks": [
         0,
         0,
         0,
         0,
-        3,
         0,
         0,
         0,
@@ -149,7 +123,33 @@
         0,
         0,
         0,
-        0
+        0,
+        13
+      ]
+    },
+    {
+      "name": "NoFileLimit",
+      "url": "https://github.com/greenythebeany/NoFileLimit",
+      "homepage": "https://github.com/greenythebeany/NoFileLimit",
+      "description": "Equicord plugin that splits files over Discord's upload limit and merges them back.",
+      "language": "TypeScript",
+      "stars": 0,
+      "pushedAt": "2026-10-25T17:30:45Z",
+      "commits": 4,
+      "weeks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
       ]
     }
   ]
