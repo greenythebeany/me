@@ -29,14 +29,29 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Matúš Ondrejka",
-        "alternateName": ["GreenyBeany", "Greeny Beany"],
-        "url": "https://greenybeany.dev/me/",
-        "image": "https://greenybeany.dev/me/og.png",
-        "jobTitle": "Robotics & Cybernetics student",
-        "affiliation": { "@type": "CollegeOrUniversity", "name": "STU FEI Bratislava" },
-        "sameAs": ["https://github.com/greenythebeany", "https://greenybeany.dev/triptych/"]
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://greenybeany.dev/me/#person",
+            "name": "Matúš Ondrejka",
+            "alternateName": ["GreenyBeany", "Greeny Beany"],
+            "url": "https://greenybeany.dev/me/",
+            "image": "https://greenybeany.dev/me/og.png",
+            "jobTitle": "Robotics & Cybernetics student",
+            "affiliation": { "@type": "CollegeOrUniversity", "name": "STU FEI Bratislava" },
+            "sameAs": ["https://github.com/greenythebeany", "https://greenybeany.dev/triptych/"]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://greenybeany.dev/triptych/#app",
+            "name": "Triptych",
+            "url": "https://greenybeany.dev/triptych/",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Windows, Linux, Android, iOS",
+            "author": { "@id": "https://greenybeany.dev/me/#person" },
+            "sameAs": ["https://github.com/greenythebeany/triptych", "https://www.instagram.com/triptych.app"]
+          }
+        ]
       }
     </script>
 
@@ -77,7 +92,7 @@
         <p lang="sk">Inžiniersky študent robotiky a kybernetiky na STU FEI v Bratislave. Plná verzia stránky potrebuje JavaScript.</p>
         <h2>Projects</h2>
         <ul>
-          <li><a href="https://greenybeany.dev/triptych/">Triptych, a Jellyfin music player</a></li>
+          <li><a href="https://greenybeany.dev/triptych/">Triptych, a Jellyfin music player</a> (<a href="https://www.instagram.com/triptych.app">Triptych on Instagram</a>)</li>
           <li><a href="https://github.com/greenythebeany/BeanyDrive">BeanyDrive, Discord-backed cloud storage</a></li>
           <li><a href="https://github.com/greenythebeany/BeanyBox">BeanyBox, a terminal-styled Gmail client</a></li>
           <li><a href="https://github.com/greenythebeany/BetterAis">BetterAIS, a calmer look for is.stuba.sk</a></li>

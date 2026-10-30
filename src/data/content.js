@@ -10,6 +10,7 @@ export const site = {
   location: { en: 'Bratislava, SK', sk: 'Bratislava, SK' },
   github: 'https://github.com/Greenythebeany',
   triptych: 'https://greenybeany.dev/triptych/',
+  triptychInstagram: 'https://www.instagram.com/triptych.app',
   cv: `${import.meta.env.BASE_URL}cv.pdf`,
 }
 
@@ -424,5 +425,6 @@ export const footer = {
   cvLink: { en: 'CV', sk: 'CV' },
   github: { en: 'GitHub', sk: 'GitHub' },
   triptych: { en: 'Triptych music player', sk: 'Hudobný prehrávač Triptych' },
+  triptychInstagram: { en: 'Triptych on Instagram', sk: 'Triptych na Instagrame' },
   top: { en: 'Back to top', sk: 'Späť hore' },
 }
