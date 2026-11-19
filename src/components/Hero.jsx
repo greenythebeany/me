@@ -2,6 +2,7 @@ import { useLang } from '../i18n'
 import { useCountUp, useNow, useReveal } from '../hooks'
 import { hero, site, ui } from '../data/content'
 import repoData from '../data/repos.json'
+import Mark from './Mark'
 
 const TOTAL = repoData.repos.reduce((n, r) => n + r.commits, 0)
 const TOP = repoData.repos[0]
@@ -60,10 +61,16 @@ export default function Hero() {
 
   return (
     <section id="about" className="hero" aria-labelledby="hero-title">
-      {/* a dotted monogram in a hairline circle: texture, not content */}
+      {/* 緑 printed in halftone dots inside a hairline circle: texture, not content */}
       <div className="hero-art" aria-hidden="true">
         <span className="hero-ring" />
-        <span className="hero-glyph">g</span>
+        <Mark cut="bold" className="hero-glyph" fill="url(#halftone)">
+          <defs>
+            <pattern id="halftone" width="12" height="12" patternUnits="userSpaceOnUse">
+              <circle cx="6" cy="6" r="2.3" fill="currentColor" />
+            </pattern>
+          </defs>
+        </Mark>
         <span className="hero-orbit" />
       </div>
 

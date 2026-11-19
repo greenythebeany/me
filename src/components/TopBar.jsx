@@ -4,6 +4,7 @@ import { useTheme } from '../theme'
 import { useMotion } from '../motion'
 import { useScrollProgress, useScrollSpy, useShortcut } from '../hooks'
 import { nav, site, ui } from '../data/content'
+import Mark from './Mark'
 
 const IDS = nav.map((n) => n.id)
 
@@ -49,9 +50,7 @@ export default function TopBar() {
 
       <div className="shell topbar-row">
         <a className="brand" href="#about">
-          <span className="brand-mark" aria-hidden="true">
-            g
-          </span>
+          <Mark className="brand-mark" />
           <span translate="no">{site.name}</span>
         </a>
 

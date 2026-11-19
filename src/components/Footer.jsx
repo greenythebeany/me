@@ -1,5 +1,6 @@
 import { useLang } from '../i18n'
 import { footer, nav, site, ui } from '../data/content'
+import Mark from './Mark'
 
 export default function Footer() {
   const { t } = useLang()
@@ -11,9 +12,7 @@ export default function Footer() {
           <p className="footbar-big">
             {t(footer.thanks)} <em>{t(footer.thanksEm)}</em>
           </p>
-          <span className="footbar-mark" aria-hidden="true">
-            g
-          </span>
+          <Mark cut="bold" className="footbar-mark" fill="none" stroke="currentColor" strokeWidth="1.2" vectorEffect="non-scaling-stroke" />
         </div>
 
         <div className="footbar-cols">

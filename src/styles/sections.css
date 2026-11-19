@@ -136,22 +136,10 @@
 }
 .hero-glyph {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  translate: 0 -8%;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 700;
-  font-size: min(44vw, 560px);
-  line-height: 1;
-  color: transparent;
-  background-image: radial-gradient(circle, var(--dim) 1.15px, transparent 1.6px);
-  background-size: 6px 6px;
-  -webkit-background-clip: text;
-  background-clip: text;
-  mask-image: linear-gradient(200deg, #000 45%, rgb(0 0 0 / 0.25) 100%);
-  -webkit-mask-image: linear-gradient(200deg, #000 45%, rgb(0 0 0 / 0.25) 100%);
+  inset: 19%;
+  color: var(--dim);
+  mask-image: linear-gradient(200deg, #000 45%, rgb(0 0 0 / 0.3) 100%);
+  -webkit-mask-image: linear-gradient(200deg, #000 45%, rgb(0 0 0 / 0.3) 100%);
 }
 .hero-orbit {
   position: absolute;
@@ -622,9 +610,6 @@
     right: -30vw;
     width: 90vw;
     opacity: 0.55;
-  }
-  .hero-glyph {
-    font-size: 72vw;
   }
   .cv-edu,
   .cv-skills {

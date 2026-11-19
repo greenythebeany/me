@@ -1,0 +1,14 @@
+{
+  "name": "GreenyBeany · Matúš Ondrejka",
+  "short_name": "GreenyBeany",
+  "start_url": "/me/",
+  "scope": "/me/",
+  "display": "browser",
+  "background_color": "#0b0b0a",
+  "theme_color": "#0b0b0a",
+  "icons": [
+    { "src": "/me/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/me/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/me/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

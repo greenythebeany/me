@@ -1,0 +1,6 @@
+# Crawlers only read robots.txt at the domain root (greenybeany.dev/robots.txt).
+# This copy documents the intended rules for /me/; mirror the Sitemap line there.
+User-agent: *
+Allow: /
+
+Sitemap: https://greenybeany.dev/me/sitemap.xml

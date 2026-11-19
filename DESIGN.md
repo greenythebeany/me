@@ -9,7 +9,7 @@ An editorial page set on warm black. Big soft serif headlines with an italic acc
 
 - **Mood:** calm, crafted, nocturnal, precise. Bone ink on warm black, with one phosphor green accent. Green is the identity: it's in the name.
 - **Density:** sparse at page level, tidy inside sections. Whitespace separates ideas, hairlines group them.
-- **Structure over decoration.** Numbered section heads, key/value spec rows, stat cells and index lists carry the personality. Decoration is limited to the halftone monogram, outlined section numerals and one orbiting dot.
+- **Structure over decoration.** Numbered section heads, key/value spec rows, stat cells and index lists carry the personality. Decoration is limited to the 緑 mark (halftone in the hero, outlined in the footer), outlined section numerals and one orbiting dot.
 - The GitHub profile renders should use the same palette: bone on warm black, green accent.
 
 Two hard rules:
@@ -97,7 +97,7 @@ Rules:
 
 ## 4. Component Stylings
 
-* **Top bar:** sticky, 72px, translucent `--bg` with a 12px backdrop blur and a hairline bottom. Monogram badge (italic serif "g" in a ring) and name on the left, numbered mono nav centred, keys and a small primary CV button on the right. The active nav item turns `--ink`, its number turns `--bright`, and a 1px accent rule draws in under it. A 1px green scroll-progress line runs along the bottom edge.
+* **Top bar:** sticky, 72px, translucent `--bg` with a 12px backdrop blur and a hairline bottom. The 緑 mark (28px, `--bright`) and the name, vertically centred on each other, on the left, numbered mono nav centred, keys and a small primary CV button on the right. The active nav item turns `--ink`, its number turns `--bright`, and a 1px accent rule draws in under it. A 1px green scroll-progress line runs along the bottom edge.
 * **Keys:** small bordered mono chips with an optional cap (`F2`). The cap only appears if the key works. Below 640px the motion word and CV button hide; below 380px the caps hide.
 * **Buttons:** 48px tall, 3px radius, mono uppercase.
   * *Primary:* solid `--fill` with `--on-fill` text, ryoku-style bone slab (ink slab in light).
@@ -109,12 +109,18 @@ Rules:
 * **Cells (`.cv-block`, timetable days):** no box. A 1px `--ink` rule on top, mono heading and zero-padded count, hairline under the header, hairline-separated rows.
 * **Meters:** a 2px hairline track with a green fill that scales in, plus a mono percentage that counts up.
 * **Project index:** an ordered list, one row per repo: green number, serif title with description and tags, a 13-week activity bar chart on a baseline, and an `↗`. The whole row is one link (stretched hit area); the website link sits above it. Hover washes the row in `--bg-panel` and turns the title green.
-* **Hero art:** a hairline circle in `--rule-strong`, a giant italic "g" printed through a 6px halftone dot pattern in `--dim` with a soft diagonal fade, and a green dot that orbits the ring once every 48s. All `aria-hidden`. It fades and slides partly off-canvas on narrow screens so it never competes with the text.
+* **Hero art:** a hairline circle in `--rule-strong`, a large 緑 printed through an SVG halftone dot pattern in `--dim` with a soft diagonal fade, and a green dot that orbits the ring once every 48s. All `aria-hidden`. It fades and slides partly off-canvas on narrow screens so it never competes with the text.
 * **Focus:** 2px `--bright` outline, 3px offset, on every interactive element. Project rows show it on the whole row.
 * **Inputs/Forms:** none today. If one is added: `--bg-panel` fill, 1px `--rule-strong` border, 3px radius, mono label above, focus ring as above.
 
 ### Depth & elevation
 Flat. No shadows and no rounded cards. Hierarchy comes from type scale, hairlines and the `--bg` → `--bg-panel` wash. The top bar's blur is the only layered effect.
+
+### Brand mark & icons
+- The mark is 緑 ("green"), drawn as SVG paths from Noto Sans JP (OFL) in `src/data/mark.js` and rendered by `src/components/Mark.jsx`. It never depends on a CJK font being installed. Use the heavy cut at small sizes and the bold cut for large decoration.
+- Icons: `favicon.svg`, `favicon.ico` (16/32/48), `favicon-48.png`, `icon-192.png`, `icon-512.png` and `apple-touch-icon.png` (180). All show the green mark on a warm-black tile, so they read on light and dark browser tabs. Google Search needs a square icon in a multiple of 48px, linked from the page.
+- `og.png` (1200×630) repeats the hero: wordmark, title, name and the halftone mark in its ring.
+- Search plumbing lives in `public/`: `sitemap.xml`, `robots.txt` (crawlers only read it at the domain root, so copy its `Sitemap:` line to greenybeany.dev/robots.txt) and `site.webmanifest`.
 
 ## 5. Layout Principles
 
