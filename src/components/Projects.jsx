@@ -1,6 +1,6 @@
 import Section from './Section'
 import { useLang } from '../i18n'
-import { trackGlow, useReveal } from '../hooks'
+import { useReveal } from '../hooks'
 import { projects, site, ui } from '../data/content'
 import repoData from '../data/repos.json'
 
@@ -24,6 +24,8 @@ function Activity({ weeks, label }) {
   )
 }
 
+/** One row of the index. The whole row is one link through the title's
+ *  stretched hit area; the optional website link sits above it. */
 function Project({ repo, index }) {
   const { t, lang } = useLang()
   const [ref] = useReveal()
@@ -33,31 +35,27 @@ function Project({ repo, index }) {
   const tag = info?.tag ?? repo.language
 
   return (
-    <article
-      ref={ref}
-      className="proj panel glow reveal"
-      onPointerMove={trackGlow}
-      style={{ '--delay': `${(index % 3) * 80}ms` }}
-    >
-      <header className="card-head chrome">
-        <span>
-          &gt;&gt; {t(projects.module)} {String(index + 1).padStart(2, '0')}
-        </span>
-        {tag && <span className="card-head-dim">{tag}</span>}
-      </header>
+    <li ref={ref} className="proj reveal" style={{ '--delay': `${(index % 3) * 70}ms` }}>
+      <span className="proj-num mono tabular" aria-hidden="true">
+        {String(index + 1).padStart(2, '0')}
+      </span>
 
       <div className="proj-body">
-        <span className="proj-ghost mono" aria-hidden="true">
-          {String(index + 1).padStart(2, '0')}
-        </span>
         <h3 className="proj-title" translate="no">
-          {/* the whole card is clickable through this link's stretched hit area */}
           <a className="proj-link" href={repo.url} target="_blank" rel="noopener">
             {title}
             <span className="sr-only"> {t(ui.newTab)}</span>
           </a>
         </h3>
         {desc && <p className="proj-desc">{desc}</p>}
+        <p className="proj-tags label">
+          {tag && <span>{tag}</span>}
+          {repo.homepage && (
+            <a className="proj-site" href={repo.homepage} target="_blank" rel="noopener">
+              {t(projects.site)} ↗<span className="sr-only"> {t(ui.newTab)}</span>
+            </a>
+          )}
+        </p>
       </div>
 
       <div className="proj-stats">
@@ -70,18 +68,10 @@ function Project({ repo, index }) {
         </p>
       </div>
 
-      <footer className="proj-foot chrome">
-        <span className="proj-open" aria-hidden="true">
-          {t(projects.open)} &gt;&gt;
-        </span>
-        {repo.homepage && (
-          <a className="proj-site" href={repo.homepage} target="_blank" rel="noopener">
-            {t(projects.site)}
-            <span className="sr-only"> {t(ui.newTab)}</span>
-          </a>
-        )}
-      </footer>
-    </article>
+      <span className="proj-arrow" aria-hidden="true">
+        ↗
+      </span>
+    </li>
   )
 }
 
@@ -102,16 +92,16 @@ export default function Projects() {
       status={t(projects.status, { n: repos.length })}
       lead={projects.lead}
     >
-      <div className="proj-grid">
+      <ol className="proj-list">
         {repos.map((r, i) => (
           <Project key={r.name} repo={r} index={i} />
         ))}
-      </div>
+      </ol>
 
       <div className="proj-after">
         <a href={site.github} className="btn" target="_blank" rel="noopener">
           {t(projects.all)}
-          <span aria-hidden="true">&gt;&gt;</span>
+          <span aria-hidden="true">↗</span>
           <span className="sr-only"> {t(ui.newTab)}</span>
         </a>
         <p className="label">{t(projects.synced, { date: synced })}</p>

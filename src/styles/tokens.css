@@ -1,24 +1,24 @@
-/* Design tokens for the Phosphor BIOS system. DESIGN.md explains every role
-   and rule; this file holds the values. The palette is P1 green phosphor:
-   a warm CRT green on green-black, GreenyBeany's colour. */
+/* Design tokens for the Bone & Phosphor system. DESIGN.md explains every
+   role and rule; this file holds the values. Warm bone neutrals on a warm
+   black, one green accent: GreenyBeany's colour. */
 
 :root {
   /* ---------- type ---------- */
+  --serif: 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  /* chrome type is small, uppercase and letterspaced; body type is not */
-  --fs-display: clamp(2.2rem, 4.4vw, 3.8rem);
-  --fs-h2: clamp(1.9rem, 5.6vw, 3.1rem);
-  --fs-h3: 1.34rem;
-  --fs-lead: clamp(1.02rem, 2.2vw, 1.16rem);
+  --fs-display: clamp(2.9rem, 8.4vw, 6.4rem);
+  --fs-h2: clamp(2.3rem, 6vw, 4.2rem);
+  --fs-h3: clamp(1.4rem, 2.6vw, 1.75rem);
+  --fs-lead: clamp(1.04rem, 2.2vw, 1.2rem);
   --fs-body: 1.02rem;
   --fs-small: 0.94rem;
-  --fs-chrome: 0.8rem;
-  --fs-label: 0.72rem;
-  --fs-micro: 0.66rem;
-  --lh-body: 1.72;
-  --measure: 68ch;
+  --fs-chrome: 0.76rem;
+  --fs-label: 0.7rem;
+  --fs-micro: 0.64rem;
+  --lh-body: 1.7;
+  --measure: 62ch;
 
   /* ---------- space & layout ---------- */
   --space-1: 4px;
@@ -31,24 +31,22 @@
   --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
-  --space-section: clamp(72px, 12vw, 148px);
+  --space-section: clamp(88px, 13vw, 168px);
 
-  --radius: 10px;
-  --radius-control: 8px;
-  --maxw: 1180px;
+  --radius: 2px;
+  --radius-control: 3px;
+  --maxw: 1240px;
   --gutter: clamp(16px, 4vw, 40px);
-  --bar-h: 128px;
+  --bar-h: 72px;
 
   /* ---------- motion ---------- */
   --ease: cubic-bezier(0.22, 0.68, 0.24, 1);
   --dur-fast: 0.2s;
   --dur-base: 0.42s;
-  --dur-slow: 0.55s;
+  --dur-slow: 0.7s;
 
   /* ---------- stacking ---------- */
   --z-bar: 90;
-  --z-scan: 9998;
-  --z-boot: 9999;
 }
 
 /* Text may only use --ink, --ink-soft, --mid and --bright; all four clear
@@ -57,51 +55,51 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --bg: #0a0e09;
-  --bg-panel: #0d120c;
-  --bg-raise: #121a10;
-  --ghost: #1a2a17;
+  --bg: #0b0b0a;
+  --bg-panel: #111110;
+  --bg-raise: #181715;
+  --ghost: #1f1e1b;
 
-  --faint: #1f3a1a;
-  --dim: #2f5f29;
-  --mid: #6aae5c;
+  --faint: #2a2824;
+  --dim: #46423b;
+  --mid: #99928a;
   --bright: #8fd67f;
-  --hot: #c8eabf;
+  --hot: #b9e8ad;
 
-  --ink: #dcf2d5;
-  --ink-soft: #a3c49a;
+  --ink: #ebe4d8;
+  --ink-soft: #c4bcaf;
 
-  --rule: #284d22;
-  --rule-soft: #1a2a17;
-  --rule-strong: #447d3c;
+  --rule: #2a2925;
+  --rule-soft: #1d1c19;
+  --rule-strong: #6b665d;
 
-  --glow: rgba(143, 214, 127, 0.08);
-  --scan: rgba(143, 214, 127, 0.025);
-  --shadow: 0 18px 50px -28px rgba(0, 0, 0, 0.9);
+  --fill: #ebe4d8;
+  --fill-hover: #ffffff;
+  --on-fill: #0b0b0a;
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
 
-  --bg: #fafcf6;
-  --bg-panel: #fdfefb;
-  --bg-raise: #f1f7e9;
-  --ghost: #e5f0d9;
+  --bg: #f4f1ea;
+  --bg-panel: #faf8f3;
+  --bg-raise: #ebe7dd;
+  --ghost: #e3ded2;
 
-  --faint: #d4e8c2;
-  --dim: #9cc982;
-  --mid: #2d6a1e;
-  --bright: #1d5c10;
-  --hot: #113d08;
+  --faint: #d9d3c6;
+  --dim: #b4ad9f;
+  --mid: #625c53;
+  --bright: #2e6b22;
+  --hot: #1f4d16;
 
-  --ink: #152510;
-  --ink-soft: #45613b;
+  --ink: #1c1b18;
+  --ink-soft: #48443d;
 
-  --rule: #bdd9a9;
-  --rule-soft: #e3eed7;
-  --rule-strong: #6c9a58;
+  --rule: #d6d0c3;
+  --rule-soft: #e6e1d6;
+  --rule-strong: #807a6e;
 
-  --glow: rgba(29, 92, 16, 0.07);
-  --scan: rgba(29, 92, 16, 0.02);
-  --shadow: 0 18px 50px -32px rgba(29, 92, 16, 0.28);
+  --fill: #1c1b18;
+  --fill-hover: #2e6b22;
+  --on-fill: #f4f1ea;
 }

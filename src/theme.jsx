@@ -2,10 +2,10 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 
 const KEY = 'gb-theme'
 const ThemeCtx = createContext(null)
-const BG = { dark: '#0a0e09', light: '#fafcf6' }
+const BG = { dark: '#0b0b0a', light: '#f4f1ea' }
 
 /** The inline script in index.html has already picked the theme (stored
- *  choice, else the OS setting) before first paint; start from what it set. */
+ *  light choice, else dark) before first paint; start from what it set. */
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() =>
     document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
@@ -16,7 +16,7 @@ export function ThemeProvider({ children }) {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', BG[theme])
   }, [theme])
 
-  // only an explicit toggle is remembered, so a first visit keeps following the OS
+  // only an explicit toggle is remembered; a first visit is always dark
   const toggle = useCallback(() => {
     setTheme((t) => {
       const next = t === 'dark' ? 'light' : 'dark'

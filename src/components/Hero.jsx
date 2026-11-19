@@ -1,122 +1,137 @@
-import { useEffect, useState } from 'react'
 import { useLang } from '../i18n'
-import { useCountUp, useDecode, useReveal } from '../hooks'
-import { hero, site } from '../data/content'
+import { useCountUp, useNow, useReveal } from '../hooks'
+import { hero, site, ui } from '../data/content'
 import repoData from '../data/repos.json'
+import Mark from './Mark'
 
 const TOTAL = repoData.repos.reduce((n, r) => n + r.commits, 0)
 const TOP = repoData.repos[0]
+const CLOCK = new Intl.DateTimeFormat('sk-SK', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZone: 'Europe/Bratislava',
+})
 
-/** Each line resolves out of noise, one after the other. Screen readers get
- *  the finished heading from the h1's label, never the noise. */
-function TitleLine({ text, index, armed }) {
-  const [go, setGo] = useState(false)
-
-  useEffect(() => {
-    if (!armed) return
-    const id = setTimeout(() => setGo(true), index * 240)
-    return () => clearTimeout(id)
-  }, [armed, index])
-
-  const shown = useDecode(text, go, 1.4)
-
+/** Ticks on its own so the rest of the hero doesn't re-render every second. */
+function Clock() {
+  const { t } = useLang()
+  const now = useNow(1000)
   return (
-    <span className="hero-line" data-text={text} aria-hidden="true">
-      {go ? shown : text.replace(/\S/g, ' ')}
-    </span>
+    <time className="tabular" dateTime={now.toISOString()} aria-label={t(ui.clock)}>
+      {CLOCK.format(now)}
+    </time>
   )
 }
 
-/** The BIOS "system information" page, filled with real numbers. On load it
- *  is dragged open from its two corner ticks: both start at the centre and
- *  pull apart to top-left and bottom-right, the frame unclipping between
- *  them. One registered property, --open (0 to 1), drives the ticks, the
- *  clip and the content fade, so with motion off it simply lands at 1. */
-function SysInfo({ ready }) {
+function Stats({ shown }) {
   const { t } = useLang()
-  const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    if (!ready) return
-    const id = setTimeout(() => setOpen(true), 320)
-    return () => clearTimeout(id)
-  }, [ready])
-
-  const total = useCountUp(TOTAL, open, 1300)
+  const total = useCountUp(TOTAL, shown, 1300)
 
   return (
-    <div className={`sysinfo-frame${open ? ' is-open' : ''}`}>
-      <span className="sysinfo-tick tl" aria-hidden="true" />
-      <span className="sysinfo-tick br" aria-hidden="true" />
-      <div className="sysinfo panel">
-        <h2 className="card-head chrome">{t(hero.panel)}</h2>
-        <dl className="sysinfo-list">
+    <dl className="hero-stats">
+      <div className="stat">
+        <dt className="label">{t(hero.activity.label)}</dt>
+        <dd className="stat-num tabular">
+          <span aria-hidden="true">{total}</span>
+          <span className="sr-only">{TOTAL}</span>
+        </dd>
+      </div>
+      <div className="stat">
+        <dt className="label">{t(hero.activity.repos)}</dt>
+        <dd className="stat-num tabular">{repoData.repos.length}</dd>
+      </div>
+      {TOP && (
+        <div className="stat">
+          <dt className="label">{t(hero.activity.top)}</dt>
+          <dd className="stat-num stat-word" translate="no">
+            <a href="#projects">{TOP.name}</a>
+          </dd>
+        </div>
+      )}
+    </dl>
+  )
+}
+
+export default function Hero() {
+  const { t } = useLang()
+  const [ref, shown] = useReveal()
+  const lines = hero.title.map((l) => t(l))
+  const last = lines.length - 1
+
+  return (
+    <section id="about" className="hero" aria-labelledby="hero-title">
+      {/* 緑 printed in halftone dots inside a hairline circle: texture, not content */}
+      <div className="hero-art" aria-hidden="true">
+        <span className="hero-ring" />
+        <Mark cut="bold" className="hero-glyph" fill="url(#halftone)">
+          <defs>
+            <pattern id="halftone" width="12" height="12" patternUnits="userSpaceOnUse">
+              <circle cx="6" cy="6" r="2.3" fill="currentColor" />
+            </pattern>
+          </defs>
+        </Mark>
+        <span className="hero-orbit" />
+      </div>
+
+      <div className="shell hero-inner reveal-group" ref={ref}>
+        <ul className="hero-strip chrome reveal">
+          <li>
+            <span className="label">{t(hero.strip.based)}</span>
+            {t(site.location)}
+          </li>
+          <li>
+            <span className="label">{t(hero.strip.time)}</span>
+            <Clock />
+          </li>
+          <li>
+            <span className="label">{t(hero.strip.version)}</span>
+            {site.version}
+          </li>
+        </ul>
+
+        <p className="hero-eyebrow label reveal" style={{ '--delay': '60ms' }}>
+          <span className="hero-dot" aria-hidden="true" />
+          {t(hero.eyebrow)}
+        </p>
+
+        <h1 id="hero-title" className="hero-title reveal" style={{ '--delay': '120ms' }}>
+          {lines.map((line, i) =>
+            i === last ? (
+              <em key={i}>{line}</em>
+            ) : (
+              <span key={i}>{line} </span>
+            ),
+          )}
+        </h1>
+
+        <p className="hero-lead reveal" style={{ '--delay': '200ms' }}>
+          {t(hero.lead)}
+        </p>
+
+        <dl className="hero-specs reveal" style={{ '--delay': '260ms' }}>
           {hero.meta.map((m, i) => (
-            <div key={i} className="leader">
+            <div key={i} className="spec">
               <dt>{t(m.key)}</dt>
               <dd>{t(m.val)}</dd>
             </div>
           ))}
         </dl>
-        {TOP && (
-          <div className="sysinfo-stat">
-            <p className="sysinfo-num mono">
-              <span aria-hidden="true">{total}</span>
-              <span className="sr-only">{TOTAL}</span>
-            </p>
-            <p className="label">{t(hero.activity.label)}</p>
-            <p className="sysinfo-top">
-              {t(hero.activity.top)}:{' '}
-              <a href="#projects" translate="no">
-                {TOP.name}
-              </a>
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
 
-export default function Hero({ ready }) {
-  const { t } = useLang()
-  const [ref] = useReveal()
-  const lines = hero.title.map((l) => t(l))
-
-  return (
-    <section id="about" className="hero" aria-labelledby="hero-title">
-      <div className="shell hero-grid reveal-group" ref={ref}>
-        <div className="hero-copy">
-          <p className="hero-eyebrow label reveal">{t(hero.eyebrow)}</p>
-
-          <h1
-            id="hero-title"
-            className="hero-title reveal"
-            style={{ '--delay': '60ms' }}
-            aria-label={lines.join(' ')}
-          >
-            {lines.map((line, i) => (
-              <TitleLine key={i} text={line} index={i} armed={ready} />
-            ))}
-          </h1>
-
-          <p className="hero-lead reveal" style={{ '--delay': '140ms' }}>
-            {t(hero.lead)}
-          </p>
-
-          <div className="hero-actions reveal" style={{ '--delay': '200ms' }}>
-            <a href="#projects" className="btn btn-primary">
-              {t(hero.ctaProjects)}
-              <span aria-hidden="true">&gt;&gt;</span>
-            </a>
-            <a href={site.cv} className="btn" download>
-              {t(hero.ctaCv)}
-              <span aria-hidden="true">↓</span>
-            </a>
-          </div>
+        <div className="reveal" style={{ '--delay': '320ms' }}>
+          <Stats shown={shown} />
         </div>
 
-        <SysInfo ready={ready} />
+        <div className="hero-actions reveal" style={{ '--delay': '380ms' }}>
+          <a href="#projects" className="btn btn-primary">
+            {t(hero.ctaProjects)}
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href={site.cv} className="btn" download>
+            {t(hero.ctaCv)}
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
       </div>
     </section>
   )

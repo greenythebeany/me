@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 
 const SCRAMBLE = '#$%&*+=?@01<>/\\[]'
 
-/** True when the visitor switched animations off with F4. The OS
- *  reduced-motion setting is deliberately not consulted; see MotionProvider. */
+/** True when animations are off: F4, or a first visit whose OS asks for
+ *  reduced motion (decided before first paint in index.html). */
 export const reducedMotion = () =>
   typeof document !== 'undefined' && document.documentElement.dataset.motion === 'off'
 
@@ -37,41 +37,6 @@ export function useReveal(options) {
   }, [options])
 
   return [ref, shown]
-}
-
-/** Resolves `text` out of random glyphs, left to right. Length never changes,
- *  so nothing reflows while it settles. */
-export function useDecode(text, active, speed = 1.7) {
-  const [out, setOut] = useState(() => (reducedMotion() ? text : ''))
-
-  useEffect(() => {
-    if (!active || reducedMotion()) {
-      setOut(text)
-      return
-    }
-    let frame = 0
-    let raf
-    const tick = () => {
-      frame += 1
-      const revealed = Math.floor(frame / speed)
-      setOut(
-        text
-          .split('')
-          .map((c, i) =>
-            i < revealed || c === ' '
-              ? c
-              : SCRAMBLE[(Math.random() * SCRAMBLE.length) | 0],
-          )
-          .join(''),
-      )
-      if (revealed < text.length) raf = requestAnimationFrame(tick)
-      else setOut(text)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [text, active, speed])
-
-  return out || text
 }
 
 /** Eases a number from 0 to `target` once `active` flips true. */
@@ -171,12 +136,4 @@ export function useShortcut(key, fn) {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [key, fn])
-}
-
-/** Feeds the cursor position to a panel as --mx/--my for its glow layer. */
-export function trackGlow(e) {
-  const el = e.currentTarget
-  const r = el.getBoundingClientRect()
-  el.style.setProperty('--mx', `${e.clientX - r.left}px`)
-  el.style.setProperty('--my', `${e.clientY - r.top}px`)
 }

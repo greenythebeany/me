@@ -1,239 +1,130 @@
-/* ---------- boot overlay ---------------------------------------------- */
-
-.boot {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-boot);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--gutter);
-  background: var(--bg);
-  animation: bootIn 0.2s var(--ease);
-}
-@keyframes bootIn {
-  from {
-    opacity: 0;
-  }
-}
-
-.boot-inner {
-  width: 100%;
-  max-width: 680px;
-  margin-inline: auto;
-  font-size: clamp(0.72rem, 2.4vw, 0.9rem);
-  line-height: 2;
-  color: var(--mid);
-}
-
-.boot-line {
-  animation: bootLine 0.16s var(--ease);
-}
-@keyframes bootLine {
-  from {
-    opacity: 0;
-    transform: translateX(-6px);
-  }
-}
-
-.boot-banner {
-  color: var(--ink);
-}
-.boot-ok {
-  color: var(--bright);
-}
-
-.boot-cursor {
-  color: var(--bright);
-}
-
-.boot-skip {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: clamp(20px, 5vh, 44px);
-  text-align: center;
-  color: var(--mid);
-}
-
 /* ---------- top bar ---------------------------------------------------- */
 
 .topbar {
   position: sticky;
   top: 0;
   z-index: var(--z-bar);
-  padding-bottom: 12px;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--rule-soft);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* how far down the document you are, drawn as a hairline across the top */
 .scrollbar-progress {
   position: absolute;
-  inset: 0 0 auto;
-  height: 2px;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
   background: var(--bright);
-  transform-origin: 0 50%;
-  transform: scaleX(0);
-  will-change: transform;
+  transform-origin: left;
 }
 
-.statusline {
-  border-bottom: 1px solid var(--rule-soft);
-  color: var(--mid);
-}
-
-.statusline-row {
+.topbar-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  height: 34px;
-  font-size: 0.68rem;
+  gap: var(--space-6);
+  min-height: var(--bar-h);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.02rem;
   white-space: nowrap;
-  overflow: hidden;
 }
-
-.statusline-brand {
+.brand-mark {
+  width: 28px;
+  height: 28px;
   color: var(--bright);
-}
-.statusline-sep {
-  margin-inline: 10px;
-  color: var(--rule);
-}
-.statusline-muted {
-  color: var(--mid);
-}
-
-.statusline-cells {
-  display: flex;
-  gap: clamp(14px, 3vw, 34px);
-}
-.statusline-clock {
-  color: var(--bright);
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---------- menu bar --------------------------------------------------- */
-
-.menubar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 12px;
-  padding: 6px 10px 6px 6px;
-  background: var(--bg-panel);
 }
 
 .menu {
-  position: relative;
   display: flex;
-  align-items: center;
-  gap: 2px;
-  min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.menu::-webkit-scrollbar {
-  display: none;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 14px;
-  border-radius: 7px;
-  font-family: var(--mono);
-  font-size: 0.76rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  white-space: nowrap;
-  transition:
-    color 0.2s var(--ease),
-    background 0.2s var(--ease);
-}
-.menu-item:hover {
-  color: var(--bright);
-  background: var(--ghost);
+  justify-content: center;
+  gap: var(--space-8);
+  flex: 1;
 }
 .menu-item {
   position: relative;
-  z-index: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+  color: var(--mid);
+  transition: color var(--dur-fast) var(--ease);
 }
+.menu-item:hover,
 .menu-item.active {
-  color: var(--bg);
-}
-.menu-item.active:hover {
-  background: none;
-}
-
-/* the pill that slides between items */
-.menu-pill {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  height: calc(100% - 4px);
-  border-radius: 7px;
-  background: var(--bright);
-  transform-origin: 0 50%;
-  translate: 0 -50%;
-  transition:
-    transform 0.42s var(--ease),
-    width 0.42s var(--ease);
-  pointer-events: none;
+  color: var(--ink);
 }
 .menu-num {
-  font-size: 0.66rem;
+  font-size: var(--fs-micro);
   color: var(--mid);
 }
 .menu-item.active .menu-num {
-  color: inherit;
-}
-
-.menu-current {
-  display: none;
-  padding-left: 10px;
-  font-size: 0.76rem;
   color: var(--bright);
+}
+/* the current section gets a short accent rule under its label */
+.menu-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--bright);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease);
+}
+.menu-item.active::after {
+  transform: scaleX(1);
 }
 
 .menu-actions {
   display: flex;
-  gap: 6px;
-  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
 }
 
 .key {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 8px 11px;
-  border: 1px solid var(--rule-strong);
-  border-radius: 7px;
+  gap: var(--space-2);
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: var(--fs-label);
   letter-spacing: 0.12em;
-  color: var(--mid);
+  text-transform: uppercase;
+  color: var(--ink-soft);
   transition:
-    color 0.2s var(--ease),
-    border-color 0.2s var(--ease),
-    background 0.2s var(--ease);
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
 }
 .key:hover {
-  color: var(--bright);
-  border-color: var(--bright);
-  background: var(--ghost);
+  border-color: var(--rule-strong);
+  color: var(--ink);
 }
 .key-cap {
-  padding: 1px 4px;
-  border-radius: 3px;
-  background: var(--ghost);
+  font-size: var(--fs-micro);
   color: var(--mid);
-  font-size: 0.62rem;
+}
+.key-motion[aria-pressed='false'] {
+  color: var(--mid);
+}
+
+.topbar-cv {
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  font-size: var(--fs-label);
 }
 
 .burger {
@@ -243,115 +134,111 @@
 /* ---------- footer ----------------------------------------------------- */
 
 .footbar {
-  margin: clamp(60px, 10vw, 120px) 0 clamp(28px, 5vw, 48px);
+  margin-top: clamp(64px, 9vw, 112px);
+  border-top: 1px solid var(--rule);
+  padding-top: clamp(56px, 9vw, 112px);
+  padding-bottom: var(--space-8);
+  overflow: hidden;
 }
 
-.footbar-panel {
-  padding: clamp(24px, 5vw, 42px) var(--gutter);
-  text-align: center;
-  background: var(--bg-panel);
+.footbar-top {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
 }
-
-.footbar-prompt {
-  font-size: clamp(1.1rem, 3.6vw, 1.7rem);
-  font-weight: 700;
-  letter-spacing: 0.1em;
+.footbar-big {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.footbar-big em {
+  font-style: italic;
+  font-weight: 300;
   color: var(--bright);
 }
+.footbar-mark {
+  flex: none;
+  width: clamp(7rem, 18vw, 13rem);
+  height: auto;
+  color: var(--dim);
+  user-select: none;
+}
 
-.footbar-note {
-  margin-top: 12px;
+.footbar-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--rule);
+}
+.footbar-cols ul {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.footbar-cols a {
   color: var(--ink-soft);
+  transition: color var(--dur-fast) var(--ease);
+}
+.footbar-cols a:hover {
+  color: var(--bright);
 }
 
 .footbar-meta {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
   flex-wrap: wrap;
-  margin-top: 18px;
-  font-size: 0.68rem;
-  color: var(--ink-soft);
-}
-.footbar-links {
-  display: flex;
-  gap: 20px;
-}
-.footbar-links a {
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-12);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule-soft);
+  font-size: var(--fs-label);
   color: var(--mid);
-  border-bottom: 1px solid transparent;
-  transition:
-    color 0.2s var(--ease),
-    border-color 0.2s var(--ease);
-}
-.footbar-links a:hover {
-  color: var(--bright);
-  border-color: var(--bright);
 }
 
-/* ---------- responsive ------------------------------------------------- */
+/* ---------- narrow screens -------------------------------------------- */
 
-@media (max-width: 860px) {
-  .statusline-cells > :not(.statusline-clock) {
-    display: none;
-  }
-
+@media (max-width: 960px) {
   .burger {
     display: inline-flex;
   }
-
-  .menubar {
-    position: relative;
-  }
-
-  /* drops down over the page instead of growing the sticky bar, so opening
-     it never pushes the content underneath */
   .menu {
-    display: none;
     position: absolute;
-    top: calc(100% + 6px);
+    top: 100%;
     left: 0;
     right: 0;
-    z-index: 1;
+    display: none;
     flex-direction: column;
-    align-items: stretch;
-    gap: 2px;
-    padding: 6px;
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    background: var(--bg-panel);
-    box-shadow: var(--shadow);
-    overscroll-behavior: contain;
+    gap: 0;
+    padding: var(--space-2) var(--gutter) var(--space-4);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg);
   }
-  /* the panel unrolls downward, then each entry types in after the last,
-     like a BIOS submenu being drawn line by line */
   .menu.open {
     display: flex;
-    animation: menuUnroll 0.32s var(--ease) both;
+    animation: menuDrop var(--dur-base) var(--ease);
   }
-  .menu.open .menu-item {
-    animation: menuLine 0.28s var(--ease) both;
-    animation-delay: calc(80ms + var(--i) * 55ms);
+  .menu-item {
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--rule-soft);
+    animation: menuLine var(--dur-base) var(--ease) both;
+    animation-delay: calc(var(--i) * 50ms);
   }
-  .menu-pill {
+  .menu-item::after {
     display: none;
   }
   .menu-item.active {
-    background: var(--bright);
-  }
-
-  .menu-current {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .menu-actions {
-    margin-left: auto;
+    color: var(--bright);
   }
 }
 
-@keyframes menuUnroll {
+@keyframes menuDrop {
   from {
     clip-path: inset(0 0 100% 0);
   }
@@ -362,19 +249,28 @@
 @keyframes menuLine {
   from {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateY(-6px);
   }
 }
 
-/* motion off reads as a key that's switched off, not as an error */
-.key-motion[aria-pressed='false'] {
-  color: var(--ink-soft);
-  border-style: dashed;
+@media (max-width: 640px) {
+  .key-word,
+  .topbar-cv {
+    display: none;
+  }
+  .brand > span:last-child {
+    display: none;
+  }
+  .footbar-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footbar-mark {
+    display: none;
+  }
 }
 
-@media (max-width: 460px) {
-  .key .key-cap,
-  .key .key-word {
+@media (max-width: 380px) {
+  .key-cap {
     display: none;
   }
 }

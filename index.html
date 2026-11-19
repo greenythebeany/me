@@ -55,27 +55,32 @@
       }
     </script>
 
+    <!-- Google Search wants a square favicon in a multiple of 48px, linked from the page -->
+    <link rel="icon" href="/me/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/me/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/me/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/me/favicon-48.png" sizes="48x48" type="image/png" />
+    <link rel="icon" href="/me/icon-192.png" sizes="192x192" type="image/png" />
     <link rel="apple-touch-icon" href="/me/apple-touch-icon.png" />
-    <meta name="theme-color" content="#0a0e09" />
+    <link rel="manifest" href="/me/site.webmanifest" />
+    <link rel="sitemap" type="application/xml" href="/me/sitemap.xml" />
+    <meta name="theme-color" content="#0b0b0a" />
     <meta name="color-scheme" content="dark light" />
 
     <link rel="preload" href="/me/fonts/jetbrains-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/me/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/me/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 
     <script>
       // Applied before first paint so the page never flashes the wrong theme.
-      // A stored choice wins; a first visit follows the OS setting.
+      // Dark unless this visitor picked light with F3; the OS setting is ignored.
       try {
-        var t = localStorage.getItem('gb-theme')
-        if (t !== 'light' && t !== 'dark') {
-          t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
-        }
+        var t = localStorage.getItem('gb-theme') === 'light' ? 'light' : 'dark'
         document.documentElement.setAttribute('data-theme', t)
-        document.querySelector('meta[name="theme-color"]').content = t === 'light' ? '#fafcf6' : '#0a0e09'
-        // animations are on unless this visitor turned them off with F4
-        document.documentElement.setAttribute('data-motion', localStorage.getItem('gb-motion') === 'off' ? 'off' : 'on')
+        document.querySelector('meta[name="theme-color"]').content = t === 'light' ? '#f4f1ea' : '#0b0b0a'
+        // a stored F4 choice wins; a first visit follows the OS reduced-motion setting
+        var m = localStorage.getItem('gb-motion')
+        if (m !== 'on' && m !== 'off') m = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'off' : 'on'
+        document.documentElement.setAttribute('data-motion', m)
         var l = localStorage.getItem('gb-lang')
         if (l === 'sk' || l === 'en') document.documentElement.lang = l
       } catch (e) {}

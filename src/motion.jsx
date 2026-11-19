@@ -3,9 +3,9 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 const KEY = 'gb-motion'
 const MotionCtx = createContext(null)
 
-/** Animations are on for everyone by default, whatever the OS setting; F4
- *  turns them off and the choice is remembered. The inline script in
- *  index.html sets data-motion before first paint, so start from that. */
+/** A first visit follows the OS reduced-motion setting; F4 flips it and the
+ *  choice is remembered. The inline script in index.html sets data-motion
+ *  before first paint, so start from that. */
 export function MotionProvider({ children }) {
   const [motion, setMotion] = useState(() =>
     document.documentElement.getAttribute('data-motion') === 'off' ? 'off' : 'on',

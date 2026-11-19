@@ -6,7 +6,7 @@
 export const site = {
   name: 'GreenyBeany',
   realName: 'Matúš Ondrejka',
-  version: 'V5.0',
+  version: 'V6.0',
   location: { en: 'Bratislava, SK', sk: 'Bratislava, SK' },
   github: 'https://github.com/Greenythebeany',
   triptych: 'https://greenybeany.dev/triptych/',
@@ -36,18 +36,6 @@ export const nav = [
   { id: 'timetable', num: '03', label: { en: 'Timetable', sk: 'Rozvrh' } },
   { id: 'projects', num: '04', label: { en: 'Projects', sk: 'Projekty' } },
 ]
-
-export const boot = {
-  // the first line is the banner; the rest render as `TEXT ....... STATUS`
-  banner: { en: 'GreenyBeany BIOS (C) 2026 — version 5.0', sk: 'GreenyBeany BIOS (C) 2026 — verzia 5.0' },
-  lines: [
-    { text: { en: 'Power-on self test', sk: 'Test po zapnutí' }, status: { en: 'OK', sk: 'OK' } },
-    { text: { en: 'Bc. degree', sk: 'Bakalársky titul' }, status: { en: 'Verified', sk: 'Overený' } },
-    { text: { en: 'Mounting Ing. programme', sk: 'Pripájam inžinierske štúdium' }, status: { en: 'OK', sk: 'OK' } },
-    { text: { en: 'Syncing active repositories', sk: 'Synchronizujem aktívne repozitáre' }, status: { en: 'OK', sk: 'OK' } },
-  ],
-  skip: { en: 'Press any key to skip', sk: 'Stlač ľubovoľný kláves a preskoč' },
-}
 
 export const hero = {
   eyebrow: {
@@ -80,6 +68,12 @@ export const hero = {
   activity: {
     label: { en: 'Commits, last 90 days', sk: 'Commity za 90 dní' },
     top: { en: 'Most active', sk: 'Najaktívnejšie' },
+    repos: { en: 'Active repositories', sk: 'Aktívne repozitáre' },
+  },
+  strip: {
+    based: { en: 'Based in', sk: 'Mesto' },
+    time: { en: 'Local time', sk: 'Miestny čas' },
+    version: { en: 'Site', sk: 'Web' },
   },
 }
 
@@ -421,8 +415,12 @@ export const projects = {
 }
 
 export const footer = {
-  halted: { en: 'Thanks for stopping by — system halted', sk: 'Vďaka za návštevu — systém zastavený' },
-  cvLink: { en: 'CV', sk: 'CV' },
+  thanks: { en: 'Thanks for', sk: 'Vďaka za' },
+  thanksEm: { en: 'stopping by.', sk: 'návštevu.' },
+  site: { en: 'On this page', sk: 'Na tejto stránke' },
+  elsewhere: { en: 'Elsewhere', sk: 'Inde' },
+  files: { en: 'Files', sk: 'Súbory' },
+  cvLink: { en: 'CV (PDF)', sk: 'Životopis (PDF)' },
   github: { en: 'GitHub', sk: 'GitHub' },
   triptych: { en: 'Triptych music player', sk: 'Hudobný prehrávač Triptych' },
   triptychInstagram: { en: 'Triptych on Instagram', sk: 'Triptych na Instagrame' },
