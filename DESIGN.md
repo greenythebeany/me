@@ -1,156 +1,159 @@
-# Design System: Phosphor BIOS
+# Design System: Bone & Phosphor
 **Project ID:** greenybeany.dev — shared spec for every site under the domain (first consumer: `greenythebeany/me`)
 
 Tokens live in `src/styles/tokens.css`. This file explains them; the CSS is the source of truth for values. When the two disagree, fix whichever is wrong and update both in the same commit.
 
 ## 1. Visual Theme & Atmosphere
 
-A firmware setup screen that learned some manners. The page reads like a BIOS: framed panels with corner ticks, numbered sections, uppercase letterspaced status labels, dot leaders, a boot sequence and a blinking caret. Underneath that chrome, the reading experience is calm and modern: generous line height, a comfortable measure, plenty of air between sections.
+An editorial page set on warm black. Big soft serif headlines with an italic accent, small tracked monospace labels, and plain sans paragraphs, all held together by hairline rules instead of boxes. It reads like a well-made spec sheet or a printed catalogue, not an app.
 
-- **Mood:** utilitarian, nocturnal, precise, a little playful. P1 phosphor green on tube black, like a CRT terminal left on overnight. Green is the identity: it's in the name.
-- **Density:** sparse at page level, dense inside panels. Whitespace separates ideas; panels group them.
-- **Personality comes from the chrome, never from the copy.** Labels, keys, numbers and statuses carry the BIOS voice. Paragraphs are plain, readable prose.
-- **The palette is a warm, true CRT green**, not a teal or mint. The GitHub profile renders should be updated to match.
+- **Mood:** calm, crafted, nocturnal, precise. Bone ink on warm black, with one phosphor green accent. Green is the identity: it's in the name.
+- **Density:** sparse at page level, tidy inside sections. Whitespace separates ideas, hairlines group them.
+- **Structure over decoration.** Numbered section heads, key/value spec rows, stat cells and index lists carry the personality. Decoration is limited to the halftone monogram, outlined section numerals and one orbiting dot.
+- The GitHub profile renders should use the same palette: bone on warm black, green accent.
 
-Two hard rules keep the gimmick honest:
-1. Every BIOS affordance must be real or clearly decorative. Never print a shortcut (`F2`, `<ENTER>`) that doesn't work.
-2. Texture (scanlines, glow, decode effects) stays below the threshold of noise and disappears entirely when the visitor turns motion off with F4.
+Two hard rules:
+1. Every affordance must be real. Never print a shortcut (`F2`) that doesn't work.
+2. Decoration never sits under text at a contrast that hurts reading, and moving decoration stops when motion is off.
 
 ## 2. Color Palette & Roles
 
-Each theme has the same token names, so components never branch on theme. Contrast figures are against the page background.
+Each theme uses the same token names, so components never branch on theme. Contrast figures are against `--bg`.
 
 ### Dark (default)
 
 | Token | Name | Hex | Role |
 |---|---|---|---|
-| `--bg` | Tube Black | `#0a0e09` | Page background, black with a trace of green like an unlit CRT |
-| `--bg-panel` | Bezel | `#0d120c` | Panel fill |
-| `--bg-raise` | Raised Bezel | `#121a10` | Panel header strips and footers |
-| `--ghost` | Burn-in | `#1a2a17` | Hover wash, lab-slot fill, key caps, oversized ghost numerals |
-| `--faint` | Deep Moss | `#1f3a1a` | **Decorative only** (1.6:1). Never text |
-| `--dim` | Low Phosphor | `#2f5f29` | **Decorative only** (2.6:1). Glitch ghost, inactive marks. Never text |
-| `--mid` | Signal Green | `#6aae5c` | Secondary text: labels, dates, metadata (7.2:1) |
-| `--bright` | P1 Phosphor | `#8fd67f` | Accent: headings' emphasis, active states, primary button fill, focus ring (11.2:1) |
-| `--hot` | Overdriven Phosphor | `#c8eabf` | Primary button hover |
-| `--ink` | Pale Phosphor | `#dcf2d5` | Primary text (16.4:1) |
-| `--ink-soft` | Faded Phosphor | `#a3c49a` | Body copy, descriptions (10.1:1) |
-| `--rule` | Circuit Trace | `#284d22` | Panel borders, dividers (decorative, 2.0:1) |
-| `--rule-soft` | Faint Trace | `#1a2a17` | Inner dividers, hairlines |
-| `--rule-strong` | Live Trace | `#447d3c` | Borders of interactive controls: buttons, keys (3.9:1, meets the 3:1 non-text rule) |
+| `--bg` | Warm Black | `#0b0b0a` | Page background |
+| `--bg-panel` | Soot | `#111110` | Row hover wash |
+| `--bg-raise` | Charcoal | `#181715` | Raised surfaces |
+| `--ghost` | Ash | `#1f1e1b` | Button hover wash |
+| `--faint` | Smoke | `#2a2824` | **Decorative only.** Empty activity bars |
+| `--dim` | Slate | `#46423b` | **Decorative only.** Halftone dots, outlined numerals |
+| `--mid` | Stone | `#99928a` | Secondary text: labels, dates, metadata (6.4:1) |
+| `--bright` | Phosphor | `#8fd67f` | The accent: italic heading words, section numbers, active nav, links, focus ring (11.3:1) |
+| `--hot` | Pale Phosphor | `#b9e8ad` | Link hover |
+| `--ink` | Bone | `#ebe4d8` | Primary text (15.6:1) |
+| `--ink-soft` | Parchment | `#c4bcaf` | Body copy, descriptions (10.5:1) |
+| `--rule` | Hairline | `#2a2925` | Rules, cell borders (decorative) |
+| `--rule-soft` | Faint Hairline | `#1d1c19` | Minor dividers |
+| `--rule-strong` | Wire | `#6b665d` | Borders of controls and the hero ring (3.5:1, meets the 3:1 non-text rule) |
+| `--fill` / `--on-fill` | Bone / Warm Black | `#ebe4d8` / `#0b0b0a` | Primary button fill and its text (15.6:1) |
 
 ### Light
 
 | Token | Name | Hex | Role |
 |---|---|---|---|
-| `--bg` | Green Paper | `#fafcf6` | Page background, the faint green of fanfold printer paper |
-| `--bg-panel` | Paper | `#fdfefb` | Panel fill |
-| `--bg-raise` | Tinted Paper | `#f1f7e9` | Panel header strips and footers |
-| `--ghost` | Paper Wash | `#e5f0d9` | Hover wash, lab-slot fill, key caps, ghost numerals |
-| `--faint` | Mist | `#d4e8c2` | **Decorative only** |
-| `--dim` | Fern | `#9cc982` | **Decorative only** |
-| `--mid` | Field Green | `#2d6a1e` | Secondary text (6.4:1; 5.6:1 on `--ghost`) |
-| `--bright` | Ledger Green | `#1d5c10` | Accent, primary button fill, focus ring (7.8:1) |
-| `--hot` | Deep Ledger | `#113d08` | Primary button hover |
-| `--ink` | Forest Ink | `#152510` | Primary text (15.6:1) |
-| `--ink-soft` | Lichen | `#45613b` | Body copy (6.7:1) |
-| `--rule` | Green Line | `#bdd9a9` | Panel borders, dividers (decorative) |
-| `--rule-soft` | Whisper Line | `#e3eed7` | Inner dividers |
-| `--rule-strong` | Moss Line | `#6c9a58` | Borders of interactive controls (3.2:1) |
-
-In light mode the roles invert: `--bright` becomes the darkest green, because the accent has to be the highest-contrast color on the page in both themes.
+| `--bg` | Paper | `#f4f1ea` | Page background |
+| `--bg-panel` | Card | `#faf8f3` | Row hover wash |
+| `--bg-raise` | Linen | `#ebe7dd` | Raised surfaces |
+| `--ghost` | Oat | `#e3ded2` | Button hover wash |
+| `--faint` / `--dim` | Sand / Taupe | `#d9d3c6` / `#b4ad9f` | **Decorative only** |
+| `--mid` | Graphite | `#625c53` | Secondary text (5.9:1; 4.9:1 on `--ghost`) |
+| `--bright` | Ledger Green | `#2e6b22` | Accent (5.7:1) |
+| `--hot` | Deep Ledger | `#1f4d16` | Link hover |
+| `--ink` | Ink | `#1c1b18` | Primary text (15.3:1) |
+| `--ink-soft` | Umber | `#48443d` | Body copy (8.6:1) |
+| `--rule` / `--rule-soft` | Hairline | `#d6d0c3` / `#e6e1d6` | Rules (decorative) |
+| `--rule-strong` | Wire | `#807a6e` | Control borders (3.8:1) |
+| `--fill` / `--on-fill` | Ink / Paper | `#1c1b18` / `#f4f1ea` | Primary button; hover turns the fill `--bright` (5.7:1) |
 
 ### Color rules
 - Text uses only `--ink`, `--ink-soft`, `--mid` or `--bright`. All four pass WCAG AA (4.5:1) on every surface in both themes.
-- `--faint` and `--dim` are for decoration. If a design needs "quieter than `--mid`" text, the answer is smaller size or less weight, not a lower-contrast color.
-- One accent. No second hue for status, errors or links: the only signals are brightness and the chrome itself (`[ OK ]`, `[X]`).
-- Text on a `--bright` fill uses `--bg`.
+- `--faint` and `--dim` are for decoration. If something needs to be quieter than `--mid`, make it smaller, not lower in contrast.
+- One accent. Green marks emphasis and state; there is no second hue.
+- Text on a `--bright` fill (timetable "now" flag) uses `--bg`.
 
 ## 3. Typography Rules
 
-Two families with strictly separate jobs:
+Three families with separate jobs:
 
-- **Monospace (`--mono`, JetBrains Mono)** is the BIOS voice: headings, labels, keys, numbers, statuses, times. Weights 400, 500 and 700.
-- **Sans (`--sans`)** is the reading voice: lead paragraphs, card copy, descriptions, list items. Weights 400 and 600. The face is Atkinson Hyperlegible Next, chosen for distinct letterforms (`I`, `l`, `1`) over a generic grotesk.
+- **Serif (`--serif`, Fraunces)** is the display voice: h1–h3, stat numbers, education roles, skill names, the footer sign-off. Weight 400 upright; italic 300 for the accented word, which is always `--bright`.
+- **Monospace (`--mono`, JetBrains Mono)** is the label voice: navigation, eyebrows, section numbers, keys, dates, times, counts. Always small, uppercase, tracked 0.12–0.18em.
+- **Sans (`--sans`, Atkinson Hyperlegible Next)** is the reading voice: leads, paragraphs, descriptions, list items. Sentence case.
+
+All three are self-hosted variable woff2 files (latin + latin-ext) in `public/fonts`.
 
 | Token | Value | Used for |
 |---|---|---|
-| `--fs-display` | `clamp(2.2rem, 4.4vw, 3.8rem)` | Hero title only. Mono 700, tracking −0.035em |
-| `--fs-h2` | `clamp(1.9rem, 5.6vw, 3.1rem)` | Section titles. Mono 700, tracking −0.02em |
-| `--fs-h3` | `1.34rem` | Project titles. Mono 700 |
-| `--fs-lead` | `clamp(1.02rem, 2.2vw, 1.16rem)` | Lead paragraphs. Sans |
-| `--fs-body` | `1.02rem` | Body copy. Sans, line height `--lh-body` (1.72) |
-| `--fs-small` | `0.94rem` | Secondary copy (places, descriptions in tight panels) |
-| `--fs-chrome` | `0.8rem` | Menu items, card headers, leaders. Mono, uppercase, 0.14em |
-| `--fs-label` | `0.72rem` | Eyebrows and labels. Mono, uppercase, 0.2em |
-| `--fs-micro` | `0.66rem` | Section numbers, key caps, card footers. Mono, uppercase |
+| `--fs-display` | `clamp(2.9rem, 8.4vw, 6.4rem)` | Hero title only. Tracking −0.025em, line height 0.98 |
+| `--fs-h2` | `clamp(2.3rem, 6vw, 4.2rem)` | Section titles, footer sign-off |
+| `--fs-h3` | `clamp(1.4rem, 2.6vw, 1.75rem)` | About cards, project titles |
+| `--fs-lead` | `clamp(1.04rem, 2.2vw, 1.2rem)` | Lead paragraphs |
+| `--fs-body` | `1.02rem` | Body copy, line height 1.7 |
+| `--fs-small` | `0.94rem` | Places, list items, timetable subjects |
+| `--fs-chrome` | `0.76rem` | Nav items, buttons |
+| `--fs-label` | `0.7rem` | Eyebrows, spec keys, cell headers |
+| `--fs-micro` | `0.64rem` | Key caps, tags, stat labels |
 
 Rules:
-- Uppercase and wide tracking belong to the mono face only. Sans text is always sentence case.
-- Body measure caps at `--measure` (68ch).
+- Every section title ends in an italic accent word (`title` + `titleEm` in content).
+- Uppercase and tracking belong to the mono face only.
+- Body measure caps at `--measure` (62ch).
 - Headings use `text-wrap: balance`; paragraphs use `text-wrap: pretty`.
-- Numbers that update or align (clock, percentages, times) use `font-variant-numeric: tabular-nums`.
-- Slovak: single-letter prepositions and conjunctions (v, k, s, z, a, o, u, i) are bound to the next word with a non-breaking space.
-- Use real typographic characters: `…` not `...`, `—` for breaks, `·` as a separator.
+- Numbers that update or align use `.tabular` (`font-variant-numeric: tabular-nums`).
+- Slovak: single-letter prepositions and conjunctions are bound to the next word by `t()`.
+- Real typographic characters: `…`, `—`, `·`, `→ ↗ ↓`.
 
 ## 4. Component Stylings
 
-* **Panels:** the core container. Gently rounded corners (`--radius`, 10px), 1px `--rule` border, `--bg-panel` fill, and two 9px corner ticks in `--bright` at 55% opacity (top-left and bottom-right) that mark the frame like a setup screen. Panels are flat: no shadow at rest.
-* **Card header strip:** a `--bg-raise` band across the top of a panel, mono chrome text in `--bright` on the left, an optional dim `--mid` readout on the right (slot number, count). Separated from the body by a `--rule-soft` hairline.
-* **Buttons:** softly rounded (8px), mono uppercase at `--fs-chrome`-ish size with 0.12em tracking.
-  * *Primary:* solid `--bright` fill, `--bg` text. Hover shifts to `--hot`.
-  * *Secondary:* transparent with a `--rule-strong` border and `--mid` text. Hover brightens the border and text to `--bright` over a `--ghost` wash.
-  * Both lift 2px on hover. A trailing glyph (`>>`, `↓`) is `aria-hidden`.
-* **Keys (top bar toggles):** small bordered chips styled like keyboard keys, with an optional cap (`F2`). The cap is only shown if that key actually works.
-* **Menu:** a single `--bright` pill slides between items instead of each item painting its own background, so changing section reads as one movement. On narrow screens the menu collapses behind a key and the bar shows the current section instead.
-* **Meters:** skills render as segmented bars (6px block, 3px gap), like a BIOS memory gauge rather than a progress bar.
-* **Leaders:** `NAME ........ VALUE` dotted leaders for key/value lists.
-* **Project cards:** whole card is one link. Header strip with module number, body with mono title and sans description, footer strip with the call to action. An oversized ghost numeral in `--ghost` sits behind the body as texture and must never overlap text.
-* **Hover glow:** panels that respond to the pointer carry a soft radial bloom (`--glow`) that tracks the cursor. Disabled on touch devices.
-* **Focus:** every interactive element shows a 2px `--bright` outline with 3px offset on `:focus-visible`. Never removed.
-* **Inputs/Forms:** none on the site today. If one is added: `--bg-panel` fill, 1px `--rule-strong` border, 8px radius, mono label above in `--fs-label`, focus ring as above.
+* **Top bar:** sticky, 72px, translucent `--bg` with a 12px backdrop blur and a hairline bottom. Monogram badge (italic serif "g" in a ring) and name on the left, numbered mono nav centred, keys and a small primary CV button on the right. The active nav item turns `--ink`, its number turns `--bright`, and a 1px accent rule draws in under it. A 1px green scroll-progress line runs along the bottom edge.
+* **Keys:** small bordered mono chips with an optional cap (`F2`). The cap only appears if the key works. Below 640px the motion word and CV button hide; below 380px the caps hide.
+* **Buttons:** 48px tall, 3px radius, mono uppercase.
+  * *Primary:* solid `--fill` with `--on-fill` text, ryoku-style bone slab (ink slab in light).
+  * *Secondary:* transparent, `--rule-strong` border, `--ink` text; hover gets an `--ghost` wash and an `--ink` border.
+  * Trailing glyphs (`→`, `↓`, `↗`) are `aria-hidden` and nudge 3px on hover.
+* **Section head:** mono line with green number and eyebrow on the left, optional status on the right, hairline below. An outlined italic serif numeral in `--dim` sits above it at the right edge.
+* **Spec rows (`.spec`):** `KEY` in mono label on the left, value on the right, hairline below. Stack on phones.
+* **Stat cells:** a bordered strip of cells split by hairlines: serif number, mono caption. The most active repo shows as an italic green link.
+* **Cells (`.cv-block`, timetable days):** no box. A 1px `--ink` rule on top, mono heading and zero-padded count, hairline under the header, hairline-separated rows.
+* **Meters:** a 2px hairline track with a green fill that scales in, plus a mono percentage that counts up.
+* **Project index:** an ordered list, one row per repo: green number, serif title with description and tags, a 13-week activity bar chart on a baseline, and an `↗`. The whole row is one link (stretched hit area); the website link sits above it. Hover washes the row in `--bg-panel` and turns the title green.
+* **Hero art:** a hairline circle in `--rule-strong`, a giant italic "g" printed through a 6px halftone dot pattern in `--dim` with a soft diagonal fade, and a green dot that orbits the ring once every 48s. All `aria-hidden`. It fades and slides partly off-canvas on narrow screens so it never competes with the text.
+* **Focus:** 2px `--bright` outline, 3px offset, on every interactive element. Project rows show it on the whole row.
+* **Inputs/Forms:** none today. If one is added: `--bg-panel` fill, 1px `--rule-strong` border, 3px radius, mono label above, focus ring as above.
 
 ### Depth & elevation
-Almost entirely flat. Hierarchy comes from borders, fills (`--bg` → `--bg-panel` → `--bg-raise`) and brightness, not shadows. The only shadow (`--shadow`) is a long, soft drop that appears under a project card on hover to sell the lift. The sticky top bar uses a translucent background with a 12px backdrop blur.
+Flat. No shadows and no rounded cards. Hierarchy comes from type scale, hairlines and the `--bg` → `--bg-panel` wash. The top bar's blur is the only layered effect.
 
 ## 5. Layout Principles
 
-- **Container:** max width `--maxw` (1180px), side gutter `--gutter` (`clamp(16px, 4vw, 40px)`).
-- **Spacing scale:** 4px base. `--space-1` 4 · `--space-2` 8 · `--space-3` 12 · `--space-4` 16 · `--space-5` 20 · `--space-6` 24 · `--space-8` 32 · `--space-10` 40 · `--space-12` 48 · `--space-16` 64. Grid gaps use `--space-5`-ish (18–20px); panel padding is 20px.
-- **Section rhythm:** sections are separated by `--space-section` (`clamp(72px, 12vw, 148px)`). Each opens with a chrome header line (number, eyebrow, status) over a hairline, then a mono title, then content.
-- **Grids:** CSS grid with `auto-fit` / `minmax`, never JS measurement. Cards align to the top so uneven content doesn't stretch neighbors. Avoid orphaned last items: choose column counts that divide the item count, or let the last item span.
-- **Anchors:** in-page jumps land below the sticky bar via `scroll-padding-top: var(--bar-h)`.
-- **Breakpoints:** 375 (phone), 768 (tablet), 1440 (desktop) are the verification widths. The menu collapses below 860px.
+- **Container:** max width `--maxw` (1240px), side gutter `--gutter` (`clamp(16px, 4vw, 40px)`).
+- **Spacing scale:** 4px base (`--space-1` … `--space-16`). Sections are separated by `--space-section` (`clamp(88px, 13vw, 168px)`).
+- **Hero:** info strip (location, live Bratislava time, site version), eyebrow, display title, lead, spec rows, stat cells, actions. The copy column is capped near 640px, and the art sits behind the right half.
+- **Grids:** CSS grid only. About is 2 columns split by a vertical hairline. CV is a 6-column grid: education 4 + skills 2, then three 2-column cells. Timetable is 4 columns, then 2, then 1. Projects is a full-width list.
+- **Anchors:** `scroll-padding-top: var(--bar-h)`.
+- **Breakpoints:** verify at 375, 768 and 1440. The nav collapses into a dropdown below 960px; grids reflow at 1100, 960 and 640px.
 
 ## 6. Motion Rules
 
-Motion explains state or rewards attention. It never blocks reading.
+Motion is quiet and editorial. It reveals, it never performs.
 
 | Token | Value | Use |
 |---|---|---|
-| `--ease` | `cubic-bezier(0.22, 0.68, 0.24, 1)` | Everything. A quick start and long settle |
-| `--dur-fast` | `0.2s` | Hover color and border changes |
-| `--dur-base` | `0.42s` | Menu pill, card lift |
-| `--dur-slow` | `0.55s` | Scroll reveals |
+| `--ease` | `cubic-bezier(0.22, 0.68, 0.24, 1)` | Everything |
+| `--dur-fast` | `0.2s` | Hover colour, border and nudge |
+| `--dur-base` | `0.42s` | Nav underline, menu drop |
+| `--dur-slow` | `0.7s` | Scroll reveals |
 
-- **Boot sequence:** a POST log of five or so lines, about 1.5 seconds. Runs once per tab (`sessionStorage`), skippable by any key or click, and skipped entirely when motion is off. The page behind it is `inert` until it finishes.
-- **Reveals:** elements fade up 14px when they enter the viewport, staggered by 60–90ms. Fire once.
-- **Decode:** titles resolve out of random glyphs left to right. Text length never changes, so nothing reflows. The accessible name is always the final text, never the noise.
-- **Count-up:** meter percentages ease from 0 as the bar fills.
-- **Caret:** a stepped 1.06s blink. Stops when motion is off.
-- Animate only `transform`, `opacity` and colors. Never `transition: all`.
-- **Panel open:** the System information panel is dragged open from its two corner ticks, which start at the centre and pull apart to top-left and bottom-right while the frame unclips. One registered property (`--open`) drives it.
-- **Menu:** the collapsed mobile menu unrolls downward and its entries step in one after another.
-- **Motion is opt-out, not OS-driven.** Animations run for everyone by default, including visitors whose OS asks for reduced motion; `F4` in the top bar turns them off and the choice is stored (`gb-motion`). With motion off, all of the above collapse to their end state instantly; scanlines and smooth scrolling turn off. This is a deliberate owner decision and departs from WCAG 2.3.3 (AAA); keep the motion small (no parallax, no large travel, nothing that flashes).
+- **Reveals:** elements fade up 18px on entering the viewport, staggered 60–90ms, once.
+- **Count-up:** the commit total and skill percentages ease from 0.
+- **Meters:** the green fill scales in over 1.1s.
+- **Orbit:** the hero dot circles the ring every 48s.
+- **Menu:** the mobile dropdown unclips downward and its items step in.
+- Animate only `transform`, `opacity`, `clip-path` and colours. Never `transition: all`.
+- **Motion opt-out:** a first visit follows `prefers-reduced-motion`. `F4` flips it and the choice is stored (`gb-motion`) and wins from then on. With motion off, everything lands at its end state instantly and smooth scrolling turns off. The inline script in `index.html` sets `data-motion` before first paint.
 
 ## 7. Theming
 
-- Dark is the default. A first visit follows `prefers-color-scheme`; after that the stored choice wins.
+- **Dark is always the default**, whatever the OS setting. Only an explicit `F3` choice of light is stored (`gb-theme`) and used on later visits.
 - An inline script in `<head>` sets `data-theme` before first paint, so the wrong theme never flashes.
-- Each theme sets `color-scheme` so native scrollbars and controls match, and `<meta name="theme-color">` follows the active `--bg`.
+- Each theme sets `color-scheme`, and `<meta name="theme-color">` follows the active `--bg`.
 
 ## 8. Content & Voice
 
 - Every user-facing string is an `{ en, sk }` pair in `src/data/content.js`, read through `t()`. That includes aria-labels, statuses and counts.
-- English and Slovak are written, not translated. Slovak follows Slovak conventions (lowercase field names, `sep.`-style month abbreviations, natural word order).
+- English and Slovak are written, not translated.
+- Personality lives in structure and the serif accent, not in jokes. Copy is plain and first-person.
 - No cookies, analytics or third-party requests. Fonts are self-hosted.
+- `index.html` carries the SEO title, description, Open Graph tags, JSON-LD (Person + Triptych) and a no-JS fallback; keep them in sync with the content.

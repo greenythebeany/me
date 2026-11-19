@@ -22,21 +22,6 @@ body {
   overflow-x: hidden;
 }
 
-/* The CRT wash: a fixed scanline grid plus a soft vignette. Kept very low
-   contrast so it reads as texture and never as noise over the copy. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-scan);
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--scan) 0 1px,
-    transparent 1px 3px
-  );
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -54,9 +39,19 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-weight: 700;
-  line-height: 1.12;
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
   text-wrap: balance;
+}
+
+h1 em,
+h2 em,
+h3 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--bright);
 }
 
 p {
@@ -85,7 +80,7 @@ ol {
 :focus-visible {
   outline: 2px solid var(--bright);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--radius-control);
 }
 
 ::selection {
@@ -93,10 +88,10 @@ ol {
   color: var(--bg);
 }
 
-/* ---------- shared chrome primitives ---------------------------------- */
+/* ---------- shared primitives ----------------------------------------- */
 
-/* Small uppercase monospace label. This is where the BIOS lives: labels,
-   keys, statuses and numbers. Body copy stays in the sans face. */
+/* Small uppercase monospace label: navigation, eyebrows, keys, numbers.
+   Body copy stays in the sans face; headings in the serif. */
 .chrome {
   font-family: var(--mono);
   font-size: var(--fs-chrome);
@@ -107,7 +102,7 @@ ol {
 .label {
   font-family: var(--mono);
   font-size: var(--fs-label);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--mid);
 }
@@ -123,111 +118,90 @@ ol {
   padding-inline: var(--gutter);
 }
 
-/* A dot leader, like `SITE .......... FEI STU`. */
-.leader {
-  display: flex;
+/* A key/value spec row on a hairline: KEY ........ value. */
+.spec {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
   align-items: baseline;
-  gap: 10px;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+}
+.spec > :first-child {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.spec > :last-child {
+  color: var(--ink);
+  text-align: right;
+}
+
+.inline-link {
+  color: var(--bright);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.inline-link:hover {
+  color: var(--hot);
+}
+
+/* ---------- buttons ---------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: 0 var(--space-6);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
   font-family: var(--mono);
   font-size: var(--fs-chrome);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
 }
-.leader::after {
-  content: '';
-  flex: 1;
-  order: 1;
-  height: 0;
-  border-bottom: 1px dotted var(--rule);
-  transform: translateY(-4px);
+.btn:hover {
+  border-color: var(--ink);
+  background: var(--ghost);
 }
-.leader > :last-child {
-  order: 2;
+.btn-primary {
+  border-color: var(--fill);
+  background: var(--fill);
+  color: var(--on-fill);
 }
-
-.panel {
-  position: relative;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--bg-panel);
+.btn-primary:hover {
+  border-color: var(--fill-hover);
+  background: var(--fill-hover);
+  color: var(--on-fill);
 }
-
-/* Corner ticks, the way a BIOS setup screen marks its frame. */
-.panel::before,
-.panel::after {
-  content: '';
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border-color: var(--bright);
-  border-style: solid;
-  opacity: 0.55;
+.btn > [aria-hidden='true'] {
+  transition: transform var(--dur-fast) var(--ease);
 }
-.panel::before {
-  top: -1px;
-  left: -1px;
-  border-width: 1px 0 0 1px;
-  border-top-left-radius: var(--radius);
+.btn:hover > [aria-hidden='true'] {
+  transform: translateX(3px);
 }
-.panel::after {
-  bottom: -1px;
-  right: -1px;
-  border-width: 0 1px 1px 0;
-  border-bottom-right-radius: var(--radius);
+.btn[download]:hover > [aria-hidden='true'] {
+  transform: translateY(2px);
 }
 
-/* Cursor-tracked phosphor bloom. Painted as a background layer rather than a
-   pseudo-element, because .panel already spends ::before and ::after on its
-   corner ticks. Registering the colour lets it fade instead of snapping. */
-@property --glow-a {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: transparent;
-}
-
-.glow {
-  --mx: 50%;
-  --my: 50%;
-  --glow-a: transparent;
-  background-image: radial-gradient(
-    380px circle at var(--mx) var(--my),
-    var(--glow-a),
-    transparent 62%
-  );
-  transition: --glow-a 0.32s var(--ease);
-}
-.glow:hover {
-  --glow-a: var(--glow);
-}
-
-@media (hover: none) {
-  .glow {
-    background-image: none;
-  }
-}
-
-.caret {
-  display: inline-block;
-  width: 0.6em;
-  background: currentColor;
-  animation: caret 1.06s steps(1) infinite;
-}
-@keyframes caret {
-  0%,
-  50% {
-    opacity: 1;
-  }
-  50.01%,
-  100% {
-    opacity: 0;
-  }
-}
+/* ---------- motion ----------------------------------------------------- */
 
 /* Reveal-on-scroll, driven by an IntersectionObserver in useReveal. */
 .reveal {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(18px);
   transition:
-    opacity 0.55s var(--ease),
-    transform 0.55s var(--ease);
+    opacity var(--dur-slow) var(--ease),
+    transform var(--dur-slow) var(--ease);
   transition-delay: var(--delay, 0ms);
 }
 .reveal.in {
@@ -242,8 +216,8 @@ ol {
   transform: none;
 }
 
-/* F4 switches motion off: everything lands on its end state at once. The
-   OS reduced-motion setting is deliberately not used; motion is opt-out. */
+/* Motion off (F4, or a first visit whose OS asks for reduced motion):
+   everything lands on its end state at once. */
 :root[data-motion='off'] {
   scroll-behavior: auto;
 }
@@ -260,12 +234,9 @@ ol {
   opacity: 1;
   transform: none;
 }
-:root[data-motion='off'] body::before {
-  display: none;
-}
 
 /* Paper gets the finished page: nothing waiting to scroll into view, no
-   overlay, no sticky chrome. */
+   sticky chrome. */
 @media print {
   .reveal,
   .reveal-group .reveal {
@@ -273,10 +244,8 @@ ol {
     transform: none !important;
     transition: none !important;
   }
-  .boot,
   .skip-link,
-  .scrollbar-progress,
-  body::before {
+  .scrollbar-progress {
     display: none !important;
   }
   .topbar {
@@ -292,8 +261,20 @@ ol {
   line-height: var(--lh-body);
 }
 .noscript h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  margin-bottom: 0.6em;
+}
+.noscript h2 {
   font-family: var(--mono);
-  color: var(--bright);
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 2em;
+}
+.noscript ul {
+  list-style: disc;
+  padding-left: 1.2em;
 }
 .noscript a {
   color: var(--bright);
@@ -321,8 +302,8 @@ ol {
   z-index: calc(var(--z-bar) + 1);
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-control);
-  background: var(--bright);
-  color: var(--bg);
+  background: var(--fill);
+  color: var(--on-fill);
   font-family: var(--mono);
   font-size: var(--fs-chrome);
   transform: translateY(-200%);

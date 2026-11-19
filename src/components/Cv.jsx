@@ -1,19 +1,20 @@
 import Section from './Section'
 import { useLang } from '../i18n'
-import { trackGlow, useCountUp, useReveal } from '../hooks'
+import { useCountUp, useReveal } from '../hooks'
 import { cv, site, ui } from '../data/content'
 
-function Block({ title, delay = 0, className = '', children }) {
+/** A hairline-topped cell: mono heading on the left, item count on the right. */
+function Block({ title, count, delay = 0, className = '', children }) {
   const [ref, shown] = useReveal()
   return (
-    <div
-      ref={ref}
-      className={`cv-block panel glow reveal ${className}`}
-      style={{ '--delay': `${delay}ms` }}
-      onPointerMove={trackGlow}
-    >
-      <header className="card-head chrome">
+    <div ref={ref} className={`cv-block reveal ${className}`} style={{ '--delay': `${delay}ms` }}>
+      <header className="cv-head chrome">
         <h3>{title}</h3>
+        {count != null && (
+          <span className="cv-count tabular" aria-hidden="true">
+            {String(count).padStart(2, '0')}
+          </span>
+        )}
       </header>
       {typeof children === 'function' ? children(shown) : children}
     </div>
@@ -27,14 +28,14 @@ function Skill({ skill, shown }) {
   return (
     <div className="skill">
       <div className="skill-row">
-        <span className="skill-name mono">{skill.name}</span>
+        <span className="skill-name">{skill.name}</span>
         <span className="skill-tag label">{t(skill.tag)}</span>
+        <span className="skill-pct mono tabular" aria-hidden="true">
+          {pct}
+        </span>
       </div>
       <div className="bar" role="img" aria-label={t(cv.skillLabel, skill)}>
         <span className="bar-fill" style={{ '--level': skill.level }} />
-        <span className="bar-pct mono" aria-hidden="true">
-          {pct}%
-        </span>
       </div>
     </div>
   )
@@ -45,25 +46,26 @@ export default function Cv() {
   const [ctaRef] = useReveal()
 
   return (
-    <Section id="cv" num="02" eyebrow={cv.eyebrow} title={cv.title} titleEm={cv.titleEm} status={t(ui.ok)}>
+    <Section id="cv" num="02" eyebrow={cv.eyebrow} title={cv.title} titleEm={cv.titleEm}>
       <div className="cv-grid">
-        <Block title={t(cv.headings.education)} className="cv-edu">
+        <Block title={t(cv.headings.education)} count={cv.education.length} className="cv-edu">
           <ol className="edu-list">
             {cv.education.map((e, i) => (
               <li key={i} className={`edu${e.current ? ' current' : ''}`}>
-                <p className="edu-role">
-                  {t(e.role)}
+                <p className="edu-when mono">
+                  {t(e.when)}
                   {e.current && <span className="edu-badge chrome">{t(cv.current)}</span>}
                 </p>
-                <p className="edu-place">{t(e.place)}</p>
-                <p className="edu-when mono">{t(e.when)}</p>
+                <div>
+                  <p className="edu-role">{t(e.role)}</p>
+                  <p className="edu-place">{t(e.place)}</p>
+                </div>
               </li>
             ))}
           </ol>
         </Block>
 
-        {/* Levels drawn as a segmented BIOS meter, counting up as they fill. */}
-        <Block title={t(cv.headings.skills)} delay={90} className="cv-skills">
+        <Block title={t(cv.headings.skills)} count={cv.skills.length} delay={90} className="cv-skills">
           {(shown) => (
             <div>
               {cv.skills.map((s) => (
@@ -73,18 +75,18 @@ export default function Cv() {
           )}
         </Block>
 
-        <Block title={t(cv.headings.languages)}>
-          <ul className="leader-list">
+        <Block title={t(cv.headings.languages)} count={cv.languages.length}>
+          <dl>
             {cv.languages.map((l, i) => (
-              <li key={i} className="leader">
-                <span>{t(l.name)}</span>
-                <span className="leader-val">{t(l.level)}</span>
-              </li>
+              <div key={i} className="spec">
+                <dt>{t(l.name)}</dt>
+                <dd>{t(l.level)}</dd>
+              </div>
             ))}
-          </ul>
+          </dl>
         </Block>
 
-        <Block title={t(cv.headings.certificates)} delay={60}>
+        <Block title={t(cv.headings.certificates)} count={cv.certificates.length} delay={60}>
           <ul className="cert-list">
             {cv.certificates.map((c, i) => (
               <li key={i}>
@@ -102,12 +104,12 @@ export default function Cv() {
           </ul>
         </Block>
 
-        <Block title={t(cv.headings.interests)} delay={120}>
-          <ul className="check-list">
+        <Block title={t(cv.headings.interests)} count={cv.interests.length} delay={120}>
+          <ul className="interest-list">
             {cv.interests.map((it, i) => (
               <li key={i}>
-                <span className="check mono" aria-hidden="true">
-                  [X]
+                <span className="interest-mark" aria-hidden="true">
+                  +
                 </span>
                 {t(it)}
               </li>

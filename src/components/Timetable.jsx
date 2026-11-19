@@ -1,6 +1,6 @@
 import Section from './Section'
 import { useLang } from '../i18n'
-import { trackGlow, useNow, useReveal } from '../hooks'
+import { useNow, useReveal } from '../hooks'
 import { timetable } from '../data/content'
 
 // Bratislava wall-clock time, whatever the visitor's own time zone is
@@ -40,15 +40,10 @@ function Day({ day, index, live }) {
   const [ref] = useReveal()
 
   return (
-    <div
-      ref={ref}
-      className="tt-day panel glow reveal"
-      style={{ '--delay': `${index * 70}ms` }}
-      onPointerMove={trackGlow}
-    >
-      <header className="card-head chrome">
+    <div ref={ref} className="tt-day reveal" style={{ '--delay': `${index * 70}ms` }}>
+      <header className="cv-head chrome">
         <h3>{t(day.day)}</h3>
-        <span className="card-head-dim">{t(timetable.slotCount, { n: String(day.slots.length).padStart(2, '0') })}</span>
+        <span className="cv-count">{t(timetable.slotCount, { n: String(day.slots.length).padStart(2, '0') })}</span>
       </header>
 
       <ul>
@@ -56,8 +51,9 @@ function Day({ day, index, live }) {
           const state = live.d === index && live.s === i ? live.kind : null
           return (
             <li key={i} className={`tt-slot${s.lab ? ' lab' : ''}${state ? ` is-${state}` : ''}`}>
-              <span className="tt-time mono">
-                <time>{s.from}</time> — <time>{s.to}</time>
+              <span className="tt-time mono tabular">
+                <i className="tt-mark" aria-hidden="true" />
+                <time>{s.from}</time>–<time>{s.to}</time>
                 {state && <span className="tt-flag chrome">{t(timetable.status[state])}</span>}
               </span>
               <span className="tt-name">{t(s.name)}</span>
@@ -94,10 +90,10 @@ export default function Timetable() {
 
       <div className="tt-legend label" aria-hidden="true">
         <span>
-          <i /> {t(timetable.legend.lecture)}
+          <i className="tt-mark" /> {t(timetable.legend.lecture)}
         </span>
         <span>
-          <i className="lab" /> {t(timetable.legend.lab)}
+          <i className="tt-mark lab" /> {t(timetable.legend.lab)}
         </span>
       </div>
     </Section>

@@ -1,16 +1,11 @@
-import { useDecode, useReveal } from '../hooks'
+import { useReveal } from '../hooks'
 import { useLang } from '../i18n'
 
-/** A framed BIOS panel with a numbered header strip. The title resolves out
- *  of noise when it scrolls into view; assistive tech reads the final text
- *  from aria-label. Everything below is plain readable content. */
+/** A numbered editorial section: a hairline header line (number, eyebrow,
+ *  optional status), a large serif title with an italic accent, a lead. */
 export default function Section({ id, num, eyebrow, title, titleEm, status, lead, children }) {
   const { t } = useLang()
-  const [ref, shown] = useReveal()
-
-  const full = t(title) + t(titleEm)
-  const head = useDecode(t(title), shown)
-  const em = useDecode(t(titleEm), shown, 2.4)
+  const [ref] = useReveal()
 
   return (
     <section id={id} className="section" aria-labelledby={`${id}-title`}>
@@ -22,15 +17,16 @@ export default function Section({ id, num, eyebrow, title, titleEm, status, lead
             </span>
             {t(eyebrow)}
           </span>
-          {status && <span className="section-head-right">[ {status} ]</span>}
+          {status && <span className="section-head-right">{status}</span>}
+          <span className="section-glyph" aria-hidden="true">
+            {num}
+          </span>
         </div>
 
         <div ref={ref} className="reveal section-intro">
-          <h2 id={`${id}-title`} className="section-title" aria-label={full}>
-            <span aria-hidden="true">
-              {head}
-              <em>{em}</em>
-            </span>
+          <h2 id={`${id}-title`} className="section-title">
+            {t(title)}
+            <em>{t(titleEm)}</em>
           </h2>
           {lead && <p className="lead">{t(lead)}</p>}
         </div>
